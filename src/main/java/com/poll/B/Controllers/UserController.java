@@ -19,13 +19,13 @@ public class UserController {
         return "User saved";
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("/getAllUsers")
     public List<User> getAllUsers() {
         return (List<User>) repository.findAll();
     }
 
-    @GetMapping("/getUserByName/{name}")
-    public User findByName(@PathVariable String name) {
-        return repository.findByName(name);
+    @GetMapping("/getUserByUsername/{username}")
+    public User findByUsername(@PathVariable String username) {
+        return repository.findByUsername(username);
     }
 }

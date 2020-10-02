@@ -14,13 +14,13 @@ public class VoteController {
     @Autowired
     private VoteRepository repository;
 
-    @PostMapping("/savePoll")
+    @PostMapping("/saveVote")
     public String saveVote(@RequestBody Vote vote) {
         repository.save(vote);
         return "vote saved";
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("/getAllVotes")
     public List<Vote> getAllVotes() {
         return (List<Vote>) repository.findAll();
     }

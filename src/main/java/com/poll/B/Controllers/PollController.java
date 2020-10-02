@@ -20,7 +20,7 @@ public class PollController {
         return "poll saved";
     }
 
-    @GetMapping("/getAll")
+    @GetMapping("/getAllPolls")
     public List<Poll> getAllPolls() {
         return (List<Poll>) repository.findAll();
     }
