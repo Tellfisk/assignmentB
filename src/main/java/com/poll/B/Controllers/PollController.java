@@ -33,4 +33,9 @@ public class PollController {
     public Poll findById(@PathVariable long id) {
         return repository.findById(id);
     }
+
+    @DeleteMapping("/deletePoll/{id}")
+    public void deleteById(@PathVariable long id) {
+        repository.deleteById(id);
+    }
 }

@@ -25,7 +25,7 @@ public class VoteController {
         return (List<Vote>) repository.findAll();
     }
 
-    @GetMapping("/geVoteByName/{user}")
+    @GetMapping("/geVoteByUser/{user}")
     public Vote findByUser(@PathVariable User user) {
         return repository.findByUser(user);
     }
