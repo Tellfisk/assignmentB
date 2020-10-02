@@ -28,4 +28,9 @@ public class PollController {
     public Poll findByName(@PathVariable String name) {
         return repository.findByName(name);
     }
+
+    @GetMapping("/getPollById/{id}")
+    public Poll findById(@PathVariable long id) {
+        return repository.findById(id);
+    }
 }

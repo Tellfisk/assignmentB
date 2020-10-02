@@ -1,5 +1,4 @@
 package com.poll.B.Repositories;
-import java.util.List;
 
 import com.poll.B.Poll;
 import org.springframework.data.repository.CrudRepository;
