@@ -2,6 +2,7 @@ package com.poll.B.Controllers;
 
 import com.poll.B.Poll;
 import com.poll.B.Repositories.PollRepository;
+import com.poll.B.Vote;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,5 +38,19 @@ public class PollController {
     @DeleteMapping("/deletePoll/{id}")
     public void deleteById(@PathVariable long id) {
         repository.deleteById(id);
+    }
+
+    @PutMapping("/poll/{id}")
+    Poll replacePoll(@RequestBody Poll newPoll, @PathVariable Long id) {
+
+        return repository.findById(id)
+                .map(poll -> {
+                    poll.setName(newPoll.getName());
+                    return repository.save(poll);
+                })
+                .orElseGet(() -> {
+                    newPoll.setId(id);
+                    return repository.save(newPoll);
+                });
     }
 }
