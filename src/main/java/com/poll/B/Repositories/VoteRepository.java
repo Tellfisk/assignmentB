@@ -9,5 +9,7 @@ public interface VoteRepository extends CrudRepository<Vote, Long> {
     Vote findByUser(User user);
 
     Vote findById(long id);
+
+    void deleteById(long id);
 }
 
