@@ -1,8 +1,8 @@
 package com.poll.B.Controllers;
 
-import com.poll.B.Repositories.VoteRepository;
 import com.poll.B.User;
 import com.poll.B.Vote;
+import com.poll.B.Repositories.VoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
