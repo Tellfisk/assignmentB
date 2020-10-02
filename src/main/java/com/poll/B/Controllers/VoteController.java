@@ -25,7 +25,7 @@ public class VoteController {
         return (List<Vote>) repository.findAll();
     }
 
-    @GetMapping("/geVoteByName/{user}")
+    @GetMapping("/geVoteByUser/{user}")
     public Vote findByUser(@PathVariable User user) {
         return repository.findByUser(user);
     }
@@ -33,5 +33,25 @@ public class VoteController {
     @GetMapping("/getVoteById/{id}")
     public Vote findById(@PathVariable long id) {
         return repository.findById(id);
+    }
+
+    @DeleteMapping
+    public void deleteById(@PathVariable long id) {
+        repository.deleteById(id);
+    }
+
+    @PutMapping("/vote/{id}")
+    Vote replaceVote(@RequestBody Vote newVote, @PathVariable Long id) {
+
+        return repository.findById(id)
+                .map(vote -> {
+                    vote.setYes(newVote.isYes());
+                    vote.setUser(newVote.getUser());
+                    return repository.save(vote);
+                })
+                .orElseGet(() -> {
+                    newVote.setId(id);
+                    return repository.save(newVote);
+                });
     }
 }
