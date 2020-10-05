@@ -3,6 +3,7 @@ package com.poll.B.Controllers;
 import com.poll.B.Poll;
 import com.poll.B.User;
 import com.poll.B.Repositories.UserRepository;
+import com.poll.B.Vote;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +24,11 @@ public class UserController {
     @GetMapping("/getAllUsers")
     public List<User> getAllUsers() {
         return (List<User>) repository.findAll();
+    }
+
+    @GetMapping("/getUserById/{id}")
+    public User findById(@PathVariable long id) {
+        return repository.findById(id);
     }
 
     @GetMapping("/getUserByUsername/{username}")

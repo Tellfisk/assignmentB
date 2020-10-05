@@ -1,6 +1,6 @@
 ----------------------------------------------------------------
-Mon Oct 05 13:55:01 CEST 2020:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0174-f89d-6e97-000002391a00 
+Mon Oct 05 14:05:33 CEST 2020:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0174-f8a7-134c-000001ffe400 
 on database directory C:\Users\Tellev2\Documents\GitHub\assignmentB\mydb with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@2626b418 
 Loaded from file:/C:/Users/Tellev2/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
 java.vendor=Oracle Corporation

@@ -7,6 +7,8 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     User findByUsername(String username);
 
+    User findById(long id);
+
     void deleteById(long id);
 }
 
