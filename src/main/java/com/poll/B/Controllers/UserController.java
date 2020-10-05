@@ -45,4 +45,10 @@ public class UserController {
                     return repository.save(newUser);
                 });
     }
+    @DeleteMapping
+    public void deleteById(@PathVariable long id) {
+        repository.deleteById(id);
+    }
+
 }
+
