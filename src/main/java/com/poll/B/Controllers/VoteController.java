@@ -41,7 +41,7 @@ public class VoteController {
     }
 
     @PutMapping("/vote/{id}")
-    Vote replaceVote(@RequestBody Vote newVote, @PathVariable Long id) {
+    public Vote replaceVote(@RequestBody Vote newVote, @PathVariable Long id) {
 
         return repository.findById(id)
                 .map(vote -> {

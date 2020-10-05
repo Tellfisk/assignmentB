@@ -41,7 +41,7 @@ public class PollController {
     }
 
     @PutMapping("/poll/{id}")
-    Poll replacePoll(@RequestBody Poll newPoll, @PathVariable Long id) {
+    public Poll replacePoll(@RequestBody Poll newPoll, @PathVariable Long id) {
 
         return repository.findById(id)
                 .map(poll -> {
