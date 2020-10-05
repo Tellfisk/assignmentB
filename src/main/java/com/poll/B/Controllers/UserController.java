@@ -28,4 +28,11 @@ public class UserController {
     public User findByUsername(@PathVariable String username) {
         return repository.findByUsername(username);
     }
+
+    @DeleteMapping
+    public void deleteById(@PathVariable long id) {
+        repository.deleteById(id);
+    }
+
 }
+
