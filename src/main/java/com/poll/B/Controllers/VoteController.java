@@ -35,7 +35,7 @@ public class VoteController {
         return repository.findById(id);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/deleteVote/{id}")
     public void deleteById(@PathVariable long id) {
         repository.deleteById(id);
     }
