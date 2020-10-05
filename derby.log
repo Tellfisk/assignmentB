@@ -1,14 +1,13 @@
 ----------------------------------------------------------------
-Mon Oct 05 13:44:16 CEST 2020:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0174-f893-9431-00000112c000 
-on database directory C:\Users\jonha\Google Drive\Skole\Programutvikling\DAT250\assignmentB\mydb with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@2626b418 
-Loaded from file:/C:/Users/jonha/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
+Mon Oct 05 13:55:01 CEST 2020:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0174-f89d-6e97-000002391a00 
+on database directory C:\Users\Tellev2\Documents\GitHub\assignmentB\mydb with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@2626b418 
+Loaded from file:/C:/Users/Tellev2/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
 java.vendor=Oracle Corporation
 java.runtime.version=14.0.2+12-46
-user.dir=C:\Users\jonha\Google Drive\Skole\Programutvikling\DAT250\assignmentB
+user.dir=C:\Users\Tellev2\Documents\GitHub\assignmentB
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
-Warning: While deleting a row from a table the index row for base table row (1,18) was not found in index with conglomerate id 257.  This problem has automatically been corrected as part of the delete operation.
