@@ -10,5 +10,6 @@ public interface PollRepository extends CrudRepository<Poll, Long> {
     Poll findById(long id);
 
     void deleteById(long id);
+
 }
 

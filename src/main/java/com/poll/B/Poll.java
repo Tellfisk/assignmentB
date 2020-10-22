@@ -1,6 +1,7 @@
 package com.poll.B;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -8,7 +9,7 @@ public class Poll {
     String name;
 
     @OneToMany
-    List<Vote> votes;
+    List<Vote> votes = new ArrayList<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
@@ -39,6 +40,7 @@ public class Poll {
     public void addVote(Vote vote){
         votes.add(vote);
     }
+
 }
 
 

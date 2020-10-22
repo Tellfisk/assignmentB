@@ -14,33 +14,33 @@ public class VoteController {
     @Autowired
     private VoteRepository repository;
 
-    @PostMapping("/saveVote")
-    public String saveVote(@RequestBody Vote vote) {
+    @PostMapping("/votes")
+    public Vote saveVote(@RequestBody Vote vote) {
         repository.save(vote);
-        return "vote saved";
+        return vote;
     }
 
-    @GetMapping("/getAllVotes")
+    @GetMapping("/votes")
     public List<Vote> getAllVotes() {
         return (List<Vote>) repository.findAll();
     }
 
-    @GetMapping("/geVoteByUser/{user}")
+    @GetMapping("/votes/user/{user}")
     public Vote findByUser(@PathVariable User user) {
         return repository.findByUser(user);
     }
 
-    @GetMapping("/getVoteById/{id}")
+    @GetMapping("/votes/{id}")
     public Vote findById(@PathVariable long id) {
         return repository.findById(id);
     }
 
-    @DeleteMapping("/deleteVote/{id}")
+    @DeleteMapping("/votes/{id}")
     public void deleteById(@PathVariable long id) {
         repository.deleteById(id);
     }
 
-    @PutMapping("/vote/{id}")
+    @PutMapping("/votes/{id}")
     public Vote replaceVote(@RequestBody Vote newVote, @PathVariable Long id) {
 
         return repository.findById(id)
@@ -55,5 +55,3 @@ public class VoteController {
                 });
     }
 }
-
-
