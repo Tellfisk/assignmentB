@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.poll.B.Vote;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -23,6 +24,16 @@ public class PollController {
     @GetMapping("/polls")
     public List<Poll> getAllPolls() {
         return (List<Poll>) repository.findAll();
+    }
+
+    @GetMapping("/polls/{id}/votes")
+    public List<Vote> putVotes(@PathVariable Long id) {
+        return repository.findById(id)
+                .map(poll -> {
+                    System.out.println(poll.getVotes().size());
+                    return poll.getVotes();
+                })
+                .orElseGet(ArrayList::new);  //TODO: Bad workaround
     }
 
     @GetMapping("/polls/name/{name}")
@@ -55,18 +66,14 @@ public class PollController {
     }
 
     @PutMapping("/polls/{id}/addVote")
-    public String addVote(@PathVariable Long id, @RequestBody Vote vote) {
-
+    public Vote addVote(@PathVariable Long id, @RequestBody Vote vote) {
+        
         return repository.findById(id)
                 .map(poll -> {
                     System.out.println(vote.isYes());
                     poll.addVote(vote);
-                    return "found poll";
+                    return vote;
                 })
-                .orElseGet(() -> {
-                    return "poll not found";
-                });
+                .orElseGet(Vote::new);  //TODO: Bad workaround
     }
-
-
 }

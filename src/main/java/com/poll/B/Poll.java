@@ -38,6 +38,9 @@ public class Poll {
         votes.add(vote);
     }
 
+    public List<Vote> getVotes() {
+        return votes;
+    }
 }
 
 

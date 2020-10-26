@@ -1,12 +1,17 @@
 package com.poll.B;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Person {
     String name;
     String password;
     boolean isAdmin;
+
+    @OneToMany
+    List<Vote> votes = new ArrayList<>();
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -50,6 +55,11 @@ public class Person {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void addVote(Vote vote){
+        System.out.println(votes.size());
+        votes.add(vote);
     }
 }
 

@@ -40,8 +40,8 @@ public class PersonController {
         return repository.findById(id)
                 .map(user -> {
                     user.setName(newPerson.getName());
-//                    user.setPassword(newPerson.getPassword());
-//                    user.setAdmin(newPerson.isAdmin());
+                    user.setPassword(newPerson.getPassword());
+                    user.setAdmin(newPerson.isAdmin());
                     return repository.save(user);
                 })
                 .orElseGet(() -> {

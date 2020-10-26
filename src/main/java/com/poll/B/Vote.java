@@ -4,9 +4,12 @@ import javax.persistence.*;
 
 @Entity
 public class Vote {
-    //@ManyToOne
-    //User user;
+
     boolean yes;
+
+    @ManyToOne
+    Person person;
+
     @ManyToOne
     Poll poll;
 
@@ -28,13 +31,21 @@ public class Vote {
         this.id = id;
     }
 
-//    public User getUser() {
-//        return user;
-//    }
+    public Poll getPoll() {
+        return poll;
+    }
 
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
+    public void setPoll(Poll poll) {
+        this.poll = poll;
+    }
+
+    public Person getPerson() {
+        return person;
+    }
+
+    public void setPerson(Person person) {
+        this.person = person;
+    }
 
     public boolean isYes() {
         return yes;
