@@ -2,12 +2,11 @@ package com.poll.B.Controllers;
 
 import com.poll.B.Poll;
 import com.poll.B.Repositories.PollRepository;
-import com.poll.B.Vote;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import com.poll.B.Vote;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class PollController {
@@ -55,28 +54,18 @@ public class PollController {
                 });
     }
 
-
     @PutMapping("/polls/{id}/addVote")
     public String addVote(@PathVariable Long id, @RequestBody Vote vote) {
-        Optional<Poll> tempPoll;
-        tempPoll = repository.findById(id);
-        System.out.println(tempPoll);
-        return tempPoll.map(poll -> {
-            System.out.println(vote.isYes());
-            VoteController.saveVote();
-            poll.addVote(vote);
-            return "fart men foreal";
-        })
-                .orElseGet(() -> {return "fart";});
 
-        /*if(tempPoll.isPresent()){
-            tempPoll.addVote(vote);
-            return vote.toString();
-        }
-        else{
-            return "fart";
-        }*/
-
+        return repository.findById(id)
+                .map(poll -> {
+                    System.out.println(vote.isYes());
+                    poll.addVote(vote);
+                    return "found poll";
+                })
+                .orElseGet(() -> {
+                    return "poll not found";
+                });
     }
 
 

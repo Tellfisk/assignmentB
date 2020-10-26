@@ -1,21 +1,24 @@
 package com.poll.B;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
-public class User {
-    String username;
+public class Person {
+    String name;
     String password;
     boolean isAdmin;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    public User(){}
+    public Person(){}
+
+    public Person(String name, String password, boolean isAdmin){
+        this.name = name;
+        this.password = password;
+        this.isAdmin = isAdmin;
+    }
 
     public Long getId() {
         return id;
@@ -25,12 +28,12 @@ public class User {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public boolean isAdmin() {

@@ -12,14 +12,10 @@ public class Poll {
     List<Vote> votes = new ArrayList<>();
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     public Poll(){}
-
-    public Poll(String name){
-        this.name = name;
-    }
 
     public Long getId() {
         return id;
@@ -38,6 +34,7 @@ public class Poll {
     }
 
     public void addVote(Vote vote){
+        System.out.println(votes.size());
         votes.add(vote);
     }
 

@@ -4,12 +4,14 @@ import javax.persistence.*;
 
 @Entity
 public class Vote {
-    @OneToOne
-    User user;
+    //@ManyToOne
+    //User user;
     boolean yes;
+    @ManyToOne
+    Poll poll;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     public Vote(){}
@@ -26,13 +28,13 @@ public class Vote {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
-    }
+//    public User getUser() {
+//        return user;
+//    }
 
-    public void setUser(User user) {
-        this.user = user;
-    }
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
 
     public boolean isYes() {
         return yes;
