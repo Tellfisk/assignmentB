@@ -67,11 +67,12 @@ public class PollController {
 
     @PutMapping("/polls/{id}/addVote")
     public Vote addVote(@PathVariable Long id, @RequestBody Vote vote) {
-        
+
         return repository.findById(id)
                 .map(poll -> {
                     System.out.println(vote.isYes());
                     poll.addVote(vote);
+                    repository.save(poll);
                     return vote;
                 })
                 .orElseGet(Vote::new);  //TODO: Bad workaround
