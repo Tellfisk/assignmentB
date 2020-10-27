@@ -1,5 +1,6 @@
 package com.poll.B.Controllers;
 
+import com.poll.B.Exceptions.PersonNotFoundException;
 import com.poll.B.Repositories.PersonRepository;
 import com.poll.B.Person;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,33 +9,35 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@RequestMapping("/persons")
 public class PersonController {
 
     @Autowired
     private PersonRepository repository;
 
-    @PostMapping("/persons")
+    @PostMapping
     public Person saveUser(@RequestBody Person user) {
         repository.save(user);
         return user;
     }
 
-    @GetMapping("/persons")
+    @GetMapping
     public List<Person> getAllPersons() {
         return (List<Person>) repository.findAll();
     }
 
-    @GetMapping("/persons/{id}")
-    public Person findById(@PathVariable long id) {
-        return repository.findById(id);
+    @GetMapping("/{id}")
+    public Person findById(@PathVariable Long id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new PersonNotFoundException(id));
     }
 
-    @GetMapping("/persons/name/{name}")
+    @GetMapping("/name/{name}")
     public Person findByname(@PathVariable String name) {
         return repository.findByName(name);
     }
 
-    @PutMapping("/persons/{id}")
+    @PutMapping("/{id}")
     public Person replaceUser(@RequestBody Person newPerson, @PathVariable Long id) {
 
         return repository.findById(id)
@@ -50,7 +53,7 @@ public class PersonController {
                 });
     }
 
-    @DeleteMapping("/persons/{id}")
+    @DeleteMapping("/{id}")
     public void deleteById(@PathVariable long id) {
         repository.deleteById(id);
     }

@@ -10,11 +10,11 @@ public class Person {
     String password;
     boolean isAdmin;
 
-    @OneToMany
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
     List<Vote> votes = new ArrayList<>();
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Long id;
 
     public Person(){}

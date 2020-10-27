@@ -14,7 +14,7 @@ public class Vote {
     Poll poll;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Long id;
 
     public Vote(){}

@@ -8,11 +8,11 @@ import java.util.List;
 public class Poll {
     String name;
 
-    @OneToMany
+    @OneToMany(mappedBy = "poll", cascade = CascadeType.ALL)
     List<Vote> votes = new ArrayList<>();
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Long id;
 
     public Poll(){}
