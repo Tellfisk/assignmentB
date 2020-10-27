@@ -19,7 +19,7 @@ public class BApplication {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/polls").allowedOrigins("http://localhost:8000");
+				registry.addMapping("/**").allowedOrigins("http://localhost:8000");
 			}
 		};
 	}
