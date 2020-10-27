@@ -22,8 +22,18 @@ public class PollController {
     }
 
     @GetMapping("/polls")
+    //@CrossOrigin(origins = "http://localhost:8080")
     public List<Poll> getAllPolls() {
-        return (List<Poll>) pollRepository.findAll();
+        List<Poll> asd = (List<Poll>) pollRepository.findAll();
+        if(asd.isEmpty()){
+            Poll xxx = new Poll();
+            xxx.setName("JARLE");
+            asd.add(xxx);
+            return asd;
+        }
+
+        else
+            return asd;
     }
 
     @GetMapping("/polls/{id}/votes")
