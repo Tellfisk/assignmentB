@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <header>
+        <title>aids</title>
+        <style>
+        
+        </style>
+    </header>
+    <body>
+        
+       <div id="infoHer">
+           Hei jeg er en div3
+           
+       </div>
+       
+    <div><button type="submit" onclick="userAction()">Trykk for å få polls</button></div>
+       
+        <script>
+            
+            var infoHer = document.getElementById("infoHer");
+
+            const userAction = async () => {
+                console.log("button pressed");
+              const response = await fetch('http://localhost:8080/polls', {
+                method: 'GET',
+                //body: myBody, // string or object
+                /*headers: {
+                  'Content-Type': 'application/json'
+                }*/
+              });
+              const myJson = await response.json(); //extract JSON from the http response
+                console.log(myJson);
+                infoHer.innerHTML = myJson;
+            }
+        </script>
+    </body>
+</html>
