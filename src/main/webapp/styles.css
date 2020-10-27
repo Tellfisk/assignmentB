@@ -1,0 +1,31 @@
+.banner {
+	
+	font-family:Arial;
+	font-size:30pt;
+	background-color :red;
+	color:white;
+}
+
+.menu  {
+	
+	font-family:verdana;
+	font-size:12pt;
+	font-weight:bold;
+	background-color :silver;
+   
+}
+
+.tableheader  {
+	
+	font-family:calibri;
+	font-size:12pt;
+	font-weight:bold;
+	background-color : black;
+	color:white;
+   
+}
+
+body {
+	font-family:calibri;
+	font-size:12pt;
+}
