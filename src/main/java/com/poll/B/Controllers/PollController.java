@@ -24,20 +24,11 @@ public class PollController {
     @GetMapping("/polls")
     //@CrossOrigin(origins = "http://localhost:8080")
     public List<Poll> getAllPolls() {
-        List<Poll> asd = (List<Poll>) pollRepository.findAll();
-        if(asd.isEmpty()){
-            Poll xxx = new Poll();
-            xxx.setName("JARLE");
-            asd.add(xxx);
-            return asd;
-        }
-
-        else
-            return asd;
+        return (List<Poll>) pollRepository.findAll();
     }
 
     @GetMapping("/polls/{id}/votes")
-    public List<Vote> putVotes(@PathVariable Long id) {
+    public List<Vote> getVotes(@PathVariable Long id) {
         return pollRepository.findById(id)
                 .map(poll -> {
                     System.out.println(poll.getVotes().size());
@@ -67,6 +58,7 @@ public class PollController {
         return pollRepository.findById(id)
                 .map(poll -> {
                     poll.setName(newPoll.getName());
+                    poll.setVotes(newPoll.getVotes());
                     return pollRepository.save(poll);
                 })
                 .orElseGet(() -> {
@@ -75,15 +67,18 @@ public class PollController {
                 });
     }
 
-//    @PutMapping("/polls/{id}/addVote")
-//    public Vote addVote(@PathVariable Long id, @RequestBody Vote vote) {
-//
-//        return pollRepository.findById(id)
-//                .map(poll -> {
-//                    System.out.println(vote.isYes());
-//                    pollRepository.save(poll);
-//                    return vote;
-//                })
-//                .orElseGet(Vote::new);  //TODO: Bad workaround
-//    }
+    @PutMapping("/polls/{id}/addVote")
+    public Poll addVote(@PathVariable Long id, @RequestBody Vote vote) {
+        return pollRepository.findById(id)
+                .map(poll -> {
+                    List<Vote> old = poll.getVotes();
+                    System.out.println("Old size " + old.size());
+                    System.out.println("Vote isyes " + vote.isYes());
+                    List<Vote> votes = new ArrayList<>();
+                    votes.add(vote);
+                    poll.setVotes(votes);
+                    return pollRepository.save(poll);
+                })
+                .orElseGet(Poll::new);  //TODO: Bad workaround
+    }
 }
