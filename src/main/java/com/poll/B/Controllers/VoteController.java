@@ -12,46 +12,46 @@ import java.util.List;
 public class VoteController {
 
     @Autowired
-    private VoteRepository repository;
+    private VoteRepository voteRepository;
 
     @PostMapping("/votes")
     public Vote saveVote(@RequestBody Vote vote) {
-        repository.save(vote);
+        voteRepository.save(vote);
         return vote;
     }
 
     @GetMapping("/votes")
     public List<Vote> getAllVotes() {
-        return (List<Vote>) repository.findAll();
+        return (List<Vote>) voteRepository.findAll();
     }
 
     @GetMapping("/votes/person/{person}")
     public Vote findByUser(@PathVariable Person person) {
-        return repository.findByPerson(person);
+        return voteRepository.findByPerson(person);
     }
 
     @GetMapping("/votes/{id}")
     public Vote findById(@PathVariable long id) {
-        return repository.findById(id);
+        return voteRepository.findById(id);
     }
 
     @DeleteMapping("/votes/{id}")
     public void deleteById(@PathVariable long id) {
-        repository.deleteById(id);
+        voteRepository.deleteById(id);
     }
 
     @PutMapping("/votes/{id}")
     public Vote replaceVote(@RequestBody Vote newVote, @PathVariable Long id) {
 
-        return repository.findById(id)
+        return voteRepository.findById(id)
                 .map(vote -> {
                     vote.setYes(newVote.isYes());
                     vote.setPerson(newVote.getPerson());
-                    return repository.save(vote);
+                    return voteRepository.save(vote);
                 })
                 .orElseGet(() -> {
                     newVote.setId(id);
-                    return repository.save(newVote);
+                    return voteRepository.save(newVote);
                 });
     }
 }

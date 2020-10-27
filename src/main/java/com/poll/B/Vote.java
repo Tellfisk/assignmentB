@@ -11,6 +11,7 @@ public class Vote {
     Person person;
 
     @ManyToOne
+    @JoinColumn(name = "POLL_ID", referencedColumnName = "ID")
     Poll poll;
 
     @Id

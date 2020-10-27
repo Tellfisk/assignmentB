@@ -13,6 +13,7 @@ public class Poll {
 
     @Id
     @GeneratedValue
+    //@Column(name = "POLL_ID", updatable = false, nullable = false)
     private Long id;
 
     public Poll(){}

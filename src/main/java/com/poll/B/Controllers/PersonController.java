@@ -13,48 +13,48 @@ import java.util.List;
 public class PersonController {
 
     @Autowired
-    private PersonRepository repository;
+    private PersonRepository personRepository;
 
     @PostMapping
     public Person saveUser(@RequestBody Person user) {
-        repository.save(user);
+        personRepository.save(user);
         return user;
     }
 
     @GetMapping
     public List<Person> getAllPersons() {
-        return (List<Person>) repository.findAll();
+        return (List<Person>) personRepository.findAll();
     }
 
     @GetMapping("/{id}")
     public Person findById(@PathVariable Long id) {
-        return repository.findById(id)
+        return personRepository.findById(id)
                 .orElseThrow(() -> new PersonNotFoundException(id));
     }
 
     @GetMapping("/name/{name}")
     public Person findByname(@PathVariable String name) {
-        return repository.findByName(name);
+        return personRepository.findByName(name);
     }
 
     @PutMapping("/{id}")
     public Person replaceUser(@RequestBody Person newPerson, @PathVariable Long id) {
 
-        return repository.findById(id)
+        return personRepository.findById(id)
                 .map(user -> {
                     user.setName(newPerson.getName());
                     user.setPassword(newPerson.getPassword());
                     user.setAdmin(newPerson.isAdmin());
-                    return repository.save(user);
+                    return personRepository.save(user);
                 })
                 .orElseGet(() -> {
                     newPerson.setId(id);
-                    return repository.save(newPerson);
+                    return personRepository.save(newPerson);
                 });
     }
 
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable long id) {
-        repository.deleteById(id);
+        personRepository.deleteById(id);
     }
 }
