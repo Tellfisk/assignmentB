@@ -1,6 +1,7 @@
 package com.poll.B.Controllers;
 
 import com.poll.B.Person;
+import com.poll.B.Poll;
 import com.poll.B.Vote;
 import com.poll.B.Repositories.VoteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,13 @@ public class VoteController {
     }
 
     @GetMapping("/votes/person/{person}")
-    public Vote findByUser(@PathVariable Person person) {
+    public Vote findByPerson(@PathVariable Person person) {
         return voteRepository.findByPerson(person);
+    }
+
+    @GetMapping("/votes/poll/{poll}")
+    public Vote findByPoll(@PathVariable Poll poll) {
+        return voteRepository.findByPoll(poll);
     }
 
     @GetMapping("/votes/{id}")
@@ -47,6 +53,7 @@ public class VoteController {
                 .map(vote -> {
                     vote.setYes(newVote.isYes());
                     vote.setPerson(newVote.getPerson());
+                    vote.setPoll(newVote.getPoll());
                     return voteRepository.save(vote);
                 })
                 .orElseGet(() -> {

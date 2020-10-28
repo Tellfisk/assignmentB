@@ -6,12 +6,12 @@ import java.util.List;
 
 @Entity
 public class Person {
-    String name;
-    String password;
-    boolean isAdmin;
+    private String name;
+    private String password;
+    private boolean isAdmin;
 
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
-    List<Vote> votes = new ArrayList<>();
+    private List<Vote> votes;
 
     @Id
     @GeneratedValue
@@ -57,9 +57,13 @@ public class Person {
         this.password = password;
     }
 
-    public void addVote(Vote vote){
-        System.out.println(votes.size());
-        votes.add(vote);
+    public void setVotes(List<Vote> votes){
+        votes.addAll(this.votes);
+        this.votes = votes;
+    }
+
+    public List<Vote> getVotes() {
+        return votes;
     }
 }
 

@@ -6,17 +6,21 @@ import java.util.List;
 
 @Entity
 public class Poll {
-    String name;
+    private String name;
 
     @OneToMany(mappedBy = "poll", cascade = CascadeType.ALL)
-    List<Vote> votes = new ArrayList<>();
+    public List<Vote> votes = new ArrayList<>();
 
     @Id
     @GeneratedValue
-    //@Column(name = "POLL_ID", updatable = false, nullable = false)
     private Long id;
 
     public Poll(){}
+
+    public Poll(String name, List<Vote> votes) {
+        this.name = name;
+        this.votes = votes;
+    }
 
     public Long getId() {
         return id;
@@ -34,9 +38,10 @@ public class Poll {
         this.name = name;
     }
 
-    public void addVote(Vote vote){
-        System.out.println(votes.size());
-        votes.add(vote);
+    public void setVotes(List<Vote> votes){
+        System.out.println("Votelist size inside Poll class " + this.votes.size());
+        votes.addAll(this.votes);
+        this.votes = votes;
     }
 
     public List<Vote> getVotes() {
