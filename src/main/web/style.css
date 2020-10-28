@@ -38,9 +38,9 @@ input, button {
 }
 
 .main-div button, .loggedin-div button {
-  background: #5d8ffc;
+  background: #040a29;
   color: #fff;
-  border: 1px solid #5d8ffc;
+  border: 1px solid #1e2c4e;
   border-radius: 5px;
   padding: 15px;
   display: block;
@@ -52,7 +52,42 @@ input, button {
 
 .main-div button:hover, .loggedin-div button:hover {
   background: #fff;
-  color: #5d8ffc;
-  border: 1px solid #5d8ffc;
+  color: #1e2c4e;
+  border: 1px solid #1e2c4e;
   cursor: pointer;
+}
+
+.txt1 {
+  font-size: 15px;
+  color: #000000;
+  line-height: 1.5;
+}
+
+.txt2 {
+  font-size: 15px;
+  color: #000000;
+  line-height: 1.5;
+}
+
+.login-more li {
+  position: relative;
+  left: 40%;
+  margin-right: -50%;
+}
+
+.login-more li::before {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: #cccccc;
+  top: 45%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  left: 0;
 }
