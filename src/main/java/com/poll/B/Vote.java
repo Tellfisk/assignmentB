@@ -5,14 +5,15 @@ import javax.persistence.*;
 @Entity
 public class Vote {
 
-    boolean yes;
+    private boolean yes;
 
     @ManyToOne
-    Person person;
+    @JoinColumn
+    private Person person;
 
     @ManyToOne
-    @JoinColumn(name = "POLL_ID", referencedColumnName = "ID")
-    Poll poll;
+    @JoinColumn
+    private Poll poll;
 
     @Id
     @GeneratedValue
@@ -20,8 +21,10 @@ public class Vote {
 
     public Vote(){}
 
-    public Vote(boolean yes){
+    public Vote(boolean yes, Person person, Poll poll) {
         this.yes = yes;
+        this.person = person;
+        this.poll = poll;
     }
 
     public Long getId() {
