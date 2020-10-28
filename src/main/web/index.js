@@ -43,3 +43,26 @@ function login(){
 function logout(){
   firebase.auth().signOut();
 }
+
+function signup() {
+  // sign user up
+  var userEmail = document.getElementById("email_reg").value;
+  var userPass = document.getElementById("password_reg").value;
+  var userName = document.getElementById("name_reg").value;
+
+
+
+  var user = firebase.auth().createUserWithEmailAndPassword(userEmail, userPass);
+
+  // create user object in userCollections
+  // not working atm
+  var docRef = firebase.firestore()
+      .collection('users')
+      .doc(user.uid);
+
+  docRef.set({name: userName});
+}
+
+
+
+
