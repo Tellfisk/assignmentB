@@ -27,7 +27,13 @@ public class PollController {
         List<Poll> asd = (List<Poll>) pollRepository.findAll();
         if(asd.isEmpty()){
             Poll xxx = new Poll();
+            Vote lll = new Vote();
+            lll.setYes(true);
+
+            xxx.setId((long) 1);
             xxx.setName("JARLE");
+
+            xxx.addVote(lll);
             asd.add(xxx);
             return asd;
         }
