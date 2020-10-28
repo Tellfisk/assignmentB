@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+//@RestController
 public class VoteController {
 
-    @Autowired
+    //@Autowired
     private VoteRepository voteRepository;
 
     @PostMapping("/votes")

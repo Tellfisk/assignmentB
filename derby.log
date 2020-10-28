@@ -1,11 +1,11 @@
 ----------------------------------------------------------------
-Tue Oct 27 23:11:21 CET 2020:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0175-6c1d-9b17-000002597660 
-on database directory C:\CODE FOLDER\School\DAT250\GUTTAPROSJEKT\assignmentB\mydb with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@2626b418 
-Loaded from file:/C:/Users/jovli/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
+Wed Oct 28 13:02:42 CET 2020:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0175-6f16-bb6f-00000269d200 
+on database directory C:\Users\Tellev2\Documents\GitHub\assignmentB\mydb with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@2626b418 
+Loaded from file:/C:/Users/Tellev2/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
 java.vendor=Oracle Corporation
 java.runtime.version=14.0.2+12-46
-user.dir=C:\CODE FOLDER\School\DAT250\GUTTAPROSJEKT\assignmentB
+user.dir=C:\Users\Tellev2\Documents\GitHub\assignmentB
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0

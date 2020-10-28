@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/persons")
+//@RestController
+//@RequestMapping("/persons")
 public class PersonController {
 
-    @Autowired
+    //@Autowired
     private PersonRepository personRepository;
 
     @PostMapping
@@ -33,7 +33,7 @@ public class PersonController {
     }
 
     @GetMapping("/name/{name}")
-    public Person findByname(@PathVariable String name) {
+    public Person findByName(@PathVariable String name) {
         return personRepository.findByName(name);
     }
 

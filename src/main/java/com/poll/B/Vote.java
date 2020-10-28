@@ -6,6 +6,7 @@ import javax.persistence.*;
 public class Vote {
 
     private boolean yes;
+    private long powner;
 
     @ManyToOne
     @JoinColumn
@@ -57,5 +58,13 @@ public class Vote {
 
     public void setYes(boolean yes) {
         this.yes = yes;
+    }
+
+    public long getPowner() {
+        return powner;
+    }
+
+    public void setPowner(long powner) {
+        this.powner = powner;
     }
 }

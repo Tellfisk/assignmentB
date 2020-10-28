@@ -9,10 +9,10 @@ import com.poll.B.Vote;
 import java.util.ArrayList;
 import java.util.List;
 
-@RestController
+//@RestController
 public class PollController {
 
-    @Autowired
+    //@Autowired
     private PollRepository pollRepository;
 
     @PostMapping("/polls")
@@ -24,22 +24,7 @@ public class PollController {
     @GetMapping("/polls")
     //@CrossOrigin(origins = "http://localhost:8080")
     public List<Poll> getAllPolls() {
-        List<Poll> asd = (List<Poll>) pollRepository.findAll();
-        if(asd.isEmpty()){
-            Poll xxx = new Poll();
-            Vote lll = new Vote();
-            lll.setYes(true);
-
-            xxx.setId((long) 1);
-            xxx.setName("JARLE");
-
-            xxx.addVote(lll);
-            asd.add(xxx);
-            return asd;
-        }
-
-        else
-            return asd;
+        return (List<Poll>) pollRepository.findAll();
     }
 
     @GetMapping("/polls/{id}/votes")
@@ -69,7 +54,6 @@ public class PollController {
 
     @PutMapping("/polls/{id}")
     public Poll replacePoll(@RequestBody Poll newPoll, @PathVariable Long id) {
-
         return pollRepository.findById(id)
                 .map(poll -> {
                     poll.setName(newPoll.getName());
@@ -81,15 +65,14 @@ public class PollController {
                 });
     }
 
-//    @PutMapping("/polls/{id}/addVote")
-//    public Vote addVote(@PathVariable Long id, @RequestBody Vote vote) {
-//
-//        return pollRepository.findById(id)
-//                .map(poll -> {
-//                    System.out.println(vote.isYes());
-//                    pollRepository.save(poll);
-//                    return vote;
-//                })
-//                .orElseGet(Vote::new);  //TODO: Bad workaround
-//    }
+    @PutMapping("/polls/{id}/addVote")
+    public Vote addVote(@PathVariable Long id, @RequestBody Vote vote) {
+        return pollRepository.findById(id)
+                .map(poll -> {
+                    System.out.println(vote.isYes());
+                    pollRepository.save(poll);
+                    return vote;
+                })
+                .orElseGet(Vote::new);  //TODO: Bad workaround
+    }
 }
