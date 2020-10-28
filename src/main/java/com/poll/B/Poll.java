@@ -8,7 +8,7 @@ import java.util.List;
 public class Poll {
     private String name;
 
-    @OneToMany(mappedBy = "poll"/*, cascade = CascadeType.ALL*/)
+    @OneToMany(mappedBy = "poll")
     public List<Vote> votes = new ArrayList<>();
 
     @Id
@@ -39,7 +39,6 @@ public class Poll {
     }
 
     public void setVotes(List<Vote> votes) {
-        System.out.println("Votelist size inside Poll class " + this.votes.size());
         votes.addAll(this.votes);
         this.votes = votes;
     }

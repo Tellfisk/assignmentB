@@ -1,7 +1,6 @@
 package com.poll.B;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -10,7 +9,7 @@ public class Person {
     private String password;
     private boolean isAdmin;
 
-    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "person")
     private List<Vote> votes;
 
     @Id

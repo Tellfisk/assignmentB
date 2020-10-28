@@ -19,4 +19,3 @@ public interface VoteRepository extends CrudRepository<Vote, Long> {
 
     void deleteById(long id);
 }
-
