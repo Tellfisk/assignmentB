@@ -6,25 +6,26 @@ import javax.persistence.*;
 public class Vote {
 
     private boolean yes;
-    private long powner;
+    private long fkpoll;
+    private long fkperson;
 
-    @ManyToOne
-    @JoinColumn
-    private Person person;
+    //@ManyToOne
+    //@JoinColumn
+    //private Person person;
 
     @ManyToOne
     @JoinColumn
     private Poll poll;
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     public Vote(){}
 
-    public Vote(boolean yes, Person person, Poll poll) {
+    public Vote(boolean yes/*, Person person*/, Poll poll) {
         this.yes = yes;
-        this.person = person;
+//        this.person = person;
         this.poll = poll;
     }
 
@@ -44,13 +45,13 @@ public class Vote {
         this.poll = poll;
     }
 
-    public Person getPerson() {
+ /*   public Person getPerson() {
         return person;
     }
 
     public void setPerson(Person person) {
         this.person = person;
-    }
+    }*/
 
     public boolean isYes() {
         return yes;
@@ -60,11 +61,19 @@ public class Vote {
         this.yes = yes;
     }
 
-    public long getPowner() {
-        return powner;
+    public long getFkpoll() {
+        return fkpoll;
     }
 
-    public void setPowner(long powner) {
-        this.powner = powner;
+    public void setFkpoll(long fkpoll) {
+        this.fkpoll = fkpoll;
+    }
+
+    public long getFkperson() {
+        return fkperson;
+    }
+
+    public void setFkperson(long fkperson) {
+        this.fkperson = fkperson;
     }
 }

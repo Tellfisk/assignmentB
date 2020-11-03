@@ -7,12 +7,13 @@ import java.util.List;
 @Entity
 public class Poll {
     private String name;
+    private long fkperson;
 
     @OneToMany(mappedBy = "poll")
     public List<Vote> votes = new ArrayList<>();
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     public Poll(){}
@@ -45,6 +46,14 @@ public class Poll {
 
     public List<Vote> getVotes() {
         return votes;
+    }
+
+    public long getFkperson() {
+        return fkperson;
+    }
+
+    public void setFkperson(long fkperson) {
+        this.fkperson = fkperson;
     }
 }
 

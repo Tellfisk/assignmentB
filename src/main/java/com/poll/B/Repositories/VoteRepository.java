@@ -11,11 +11,13 @@ public interface VoteRepository extends CrudRepository<Vote, Long> {
 
     Vote findByPoll(Poll poll);
 
-    Vote findByPerson(Person person);
+//    Vote findByPerson(Person person);
 
     Vote findById(long id);
 
-    List<Vote> findAllByPowner(long id);
+    List<Vote> findAllByFkpoll(long id);
+
+    List<Vote> findAllByFkperson(Long id);
 
     void deleteById(long id);
 }

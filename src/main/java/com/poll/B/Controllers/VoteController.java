@@ -26,10 +26,10 @@ public class VoteController {
         return (List<Vote>) voteRepository.findAll();
     }
 
-    @GetMapping("/votes/person/{person}")
+/*    @GetMapping("/votes/person/{person}")
     public Vote findByPerson(@PathVariable Person person) {
         return voteRepository.findByPerson(person);
-    }
+    }*/
 
     @GetMapping("/votes/poll/{poll}")
     public Vote findByPoll(@PathVariable Poll poll) {
@@ -52,7 +52,7 @@ public class VoteController {
         return voteRepository.findById(id)
                 .map(vote -> {
                     vote.setYes(newVote.isYes());
-                    vote.setPerson(newVote.getPerson());
+//                    vote.setPerson(newVote.getPerson());
                     vote.setPoll(newVote.getPoll());
                     return voteRepository.save(vote);
                 })

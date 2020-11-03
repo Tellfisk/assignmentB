@@ -23,13 +23,13 @@ public class RestApiController {
     @Autowired
     private PollRepository pollRepository;
 
-    @PostMapping
-    public Person saveUser(@RequestBody Person user) {
-        personRepository.save(user);
-        return user;
+    @PostMapping("/persons")
+    public Person savePerson(@RequestBody Person person) {
+        personRepository.save(person);
+        return person;
     }
 
-    @GetMapping
+    @GetMapping("/persons")
     public List<Person> getAllPersons() {
         return (List<Person>) personRepository.findAll();
     }
@@ -43,6 +43,20 @@ public class RestApiController {
     @GetMapping("persons/name/{name}")
     public Person findPersonByName(@PathVariable String name) {
         return personRepository.findByName(name);
+    }
+
+    @GetMapping("/persons/{id}/votes")
+    public List<Vote> getVotesFromPerson(@PathVariable Long id) {
+        return personRepository.findById(id)
+                .map(person -> voteRepository.findAllByFkperson(person.getId()))
+                .orElseGet(ArrayList::new);  //TODO: Bad workaround
+    }
+
+    @GetMapping("/persons/{id}/polls")
+    public List<Poll> getPollsFromPerson(@PathVariable Long id) {
+        return personRepository.findById(id)
+                .map(person -> pollRepository.findAllByFkperson(person.getId()))
+                .orElseGet(ArrayList::new);  //TODO: Bad workaround
     }
 
     @PutMapping("persons/{id}")
@@ -76,23 +90,23 @@ public class RestApiController {
     public List<Poll> getAllPolls() {
         List<Poll> polls = (List<Poll>) pollRepository.findAll();
         for (Poll poll : polls) {
-            List<Vote> votes = (List<Vote>) voteRepository.findAllByPowner(poll.getId());
+            List<Vote> votes = (List<Vote>) voteRepository.findAllByFkpoll(poll.getId());
             poll.setVotes(votes);
         }
         return polls;
     }
 
     @GetMapping("/polls/{id}/votes")
-    public List<Vote> getVotes(@PathVariable Long id) {
+    public List<Vote> getVotesFromPoll(@PathVariable Long id) {
         return pollRepository.findById(id)
-                .map(poll -> voteRepository.findAllByPowner(poll.getId()))
+                .map(poll -> voteRepository.findAllByFkpoll(poll.getId()))
                 .orElseGet(ArrayList::new);  //TODO: Bad workaround
     }
 
     @GetMapping("/polls/name/{name}")
     public Poll findByName(@PathVariable String name) {
         Poll poll = pollRepository.findByName(name);
-        List<Vote> votes = (List<Vote>) voteRepository.findAllByPowner(poll.getId());
+        List<Vote> votes = (List<Vote>) voteRepository.findAllByFkpoll(poll.getId());
         poll.setVotes(votes);
         return poll;
     }
@@ -100,7 +114,7 @@ public class RestApiController {
     @GetMapping("/polls/{id}")
     public Poll findPollById(@PathVariable long id) {
         Poll poll = pollRepository.findById(id);
-        List<Vote> votes = (List<Vote>) voteRepository.findAllByPowner(poll.getId());
+        List<Vote> votes = voteRepository.findAllByFkpoll(poll.getId());
         poll.setVotes(votes);
         return poll;
     }
@@ -115,7 +129,9 @@ public class RestApiController {
         return pollRepository.findById(id)
                 .map(poll -> {
                     poll.setName(newPoll.getName());
-                    poll.setVotes((newPoll.getVotes()));
+                    //poll.setVotes((newPoll.getVotes()));
+                    for (Vote vote : newPoll.getVotes())
+                        voteRepository.save(vote);
                     return pollRepository.save(poll);
                 })
                 .orElseGet(() -> {
@@ -135,19 +151,19 @@ public class RestApiController {
         return (List<Vote>) voteRepository.findAll();
     }
 
-    @GetMapping("/votes/person/{person}")
+/*    @GetMapping("/votes/person/{person}")
     public Vote findByPerson(@PathVariable Person person) {
         return voteRepository.findByPerson(person);
-    }
+    }*/
 
     @GetMapping("/votes/poll/{poll}")
     public Vote findByPoll(@PathVariable Poll poll) {
         return voteRepository.findByPoll(poll);
     }
 
-    @GetMapping("/votes/powner/{powner}")
-    public List<Vote> findAllByPowner(@PathVariable long powner) {
-        return voteRepository.findAllByPowner(powner);
+    @GetMapping("/votes/fkpoll/{fkpoll}")
+    public List<Vote> findAllByFkpoll(@PathVariable long fkpoll) {
+        return voteRepository.findAllByFkpoll(fkpoll);
     }
 
     @GetMapping("/votes/{id}")
@@ -165,9 +181,9 @@ public class RestApiController {
         return voteRepository.findById(id)
                 .map(vote -> {
                     vote.setYes(newVote.isYes());
-                    vote.setPerson(newVote.getPerson());
+//                    vote.setPerson(newVote.getPerson());
                     vote.setPoll(newVote.getPoll());
-                    vote.setPowner((newVote.getPowner()));
+                    vote.setFkpoll(newVote.getFkpoll());
                     return voteRepository.save(vote);
                 })
                 .orElseGet(() -> {
