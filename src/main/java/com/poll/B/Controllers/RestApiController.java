@@ -7,11 +7,15 @@ import com.poll.B.Repositories.PersonRepository;
 import com.poll.B.Repositories.PollRepository;
 import com.poll.B.Repositories.VoteRepository;
 import com.poll.B.Vote;
+import com.poll.B.VoteDistribution;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 @RestController
 public class RestApiController {
@@ -101,6 +105,26 @@ public class RestApiController {
         return pollRepository.findById(id)
                 .map(poll -> voteRepository.findAllByFkpoll(poll.getId()))
                 .orElseGet(ArrayList::new);  //TODO: Bad workaround
+    }
+
+    @GetMapping("/polls/{id}/distribution")
+    public ResponseEntity<VoteDistribution> getDistributionFromPoll(@PathVariable Long id) {
+        return pollRepository.findById(id)
+                .map(poll -> {
+                    List<Vote> votes = voteRepository.findAllByFkpoll(poll.getId());
+                    int yes = 0;
+                    int no = 0;
+                    for (Vote v : votes) {
+                        if (v.isYes()) {
+                            yes++;
+                        } else {
+                            no++;
+                        }
+                    }
+                    VoteDistribution dist = new VoteDistribution(yes, no);
+                    return new ResponseEntity<VoteDistribution>(dist,  HttpStatus.OK);
+                })
+                .orElse(new ResponseEntity<VoteDistribution>(HttpStatus.NO_CONTENT));  //TODO: Bad workaround
     }
 
     @GetMapping("/polls/name/{name}")

@@ -1,4 +1,6 @@
-// Fiebase config
+//import * as http from "http.js"
+
+// Firebase config
 var config = {
   apiKey: "AIzaSyDV0lSwCZ-lEqHVXujRWyjsYli5WRZ2Ppo",
   authDomain: "poll-bb906.firebaseapp.com",
@@ -12,15 +14,14 @@ var config = {
 firebase.initializeApp(config);
 // Auth reference
 const auth = firebase.auth();
-
+var email;
 
 auth.onAuthStateChanged(function (user) {
   if (user) {
     // User is signed in
 
     var user = auth.currentUser;
-
-
+    setmail(user.email);
     if (user != null) {
       // Valid user
 
@@ -32,15 +33,19 @@ auth.onAuthStateChanged(function (user) {
   }
 });
 
+function setmail(mail) {
+  email = mail;
+}
+
 function login() {
 
   var email = document.getElementById("email_field").value;
   var password = document.getElementById("password_field").value;
 
-  auth.signInWithEmailAndPassword(email, password).then(function (user) {
+  auth.signInWithEmailAndPassword(email, password)
+      .then(function (user) {
     // User signed in
     window.location.href = "dashboard.html";
-    console.log("hey");
 
   }).catch(function (error) {
     // Something went wrong
@@ -54,7 +59,7 @@ function login() {
     }
     console.log(error);
   });
-
+  console.log("hei login")
 }
 
 function logout() {
@@ -67,6 +72,7 @@ function logout() {
   window.location.href = "login.html";
 }
 
+
 function signup() {
   // Sign user up
   var email = document.getElementById("email_reg").value;
@@ -75,7 +81,9 @@ function signup() {
   auth.createUserWithEmailAndPassword(email, password)
     .then(function success(userData) {
       // Potentially do something with userData
-
+      //var pollJson = "{ \"email:\": \"" + email + "\" }";
+      //request(url + "/persons", 'POST', pollJson);
+      window.location.href = "dashboard.html";
     }).catch(function failure(error) {
 
       var errorCode = error.code;
@@ -84,6 +92,6 @@ function signup() {
 
     });
 
-  window.location.href = "dashboard.html";
+
 
 }

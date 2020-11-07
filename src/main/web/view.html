@@ -19,21 +19,21 @@
 
     <div class="container">
         <h1>Polldata:</h1>
-     
+
         <div class="outerman">
             <div class="getButtons">
                 <button type="submit" onclick="getAllPolls()">Get all polls</button>
             </div>
-     
+
             <div class="getButtons">
-     
+
                 <button type="submit" onclick="getSinglePoll()">Get single poll</button>
                 <p> Input id:
                     <input type="number" id="pollIdInp">
                 </p>
             </div>
         </div>
-     
+
         <div><p id="infoHer"></p></div>
     </div>
 
@@ -42,6 +42,25 @@
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-firestore.js"></script>
     <script src="scripts/auth.js"></script>
     <script src="scripts/http.js"></script>
+    <script>
+
+        function getUserEmail(user) {
+            //email = user.email;
+        }
+
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                // User is signed in.
+                getUserEmail(user);
+            }
+            else {
+                // User is signed out.
+            }
+        });
+        console.log(email)
+
+
+    </script>
 </body>
 
 </html>

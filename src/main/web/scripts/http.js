@@ -60,6 +60,7 @@ async function getAllPolls() {
 }
 
 // HTTP Request
+
 let request = async (nowUrl, method, body) => {
     console.log("button pressed");
 
@@ -71,13 +72,12 @@ let request = async (nowUrl, method, body) => {
         }
     });
     const myJson = await response.text(); //extract JSON from the http response
-    console.log(pollJson);
     return myJson;
 }
 
 async function createPoll(email) {
     var name = document.getElementById("pname").value;
-    var pollJson = "{ \"name\": \"" + name + "\" }";
+    var pollJson = "{ \"name\": \"" + name + "\", \"email\": \"" + email + "\" }";
     var currUrl = url + "/polls",
         retVal = await request(currUrl, 'POST', pollJson);
     console.log(retVal.value);
