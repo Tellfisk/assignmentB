@@ -9,9 +9,12 @@ cat > $delScript <<EOF
 echo  "Shutting processes down..."
 kill -SIGTERM $pythonId
 kill -SIGTERM $mavenId
-wait $pythonId $mavenId
+while kill -0 $pythonId $mavenId; do
+	sleep1
+done
 echo "Processes shut down."
+rm -f $delScript
 EOF
 
-echo "Processes started. Run ${delScript} to stop processes."
 chmod +x $delScript
+echo "Processes started. Run ${delScript} to stop processes."
