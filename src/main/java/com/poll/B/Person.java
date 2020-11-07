@@ -1,16 +1,12 @@
 package com.poll.B;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class Person {
-    private String name;
+    private String email;
     private String password;
     private boolean isAdmin;
-
-/*    @OneToMany(mappedBy = "person")
-    private List<Vote> votes;*/
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,8 +14,8 @@ public class Person {
 
     public Person(){}
 
-    public Person(String name, String password, boolean isAdmin){
-        this.name = name;
+    public Person(String email, String password, boolean isAdmin){
+        this.email = email;
         this.password = password;
         this.isAdmin = isAdmin;
     }
@@ -32,12 +28,12 @@ public class Person {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getEmail() {
+        return email;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public boolean isAdmin() {

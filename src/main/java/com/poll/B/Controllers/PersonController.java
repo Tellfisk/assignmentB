@@ -3,7 +3,6 @@ package com.poll.B.Controllers;
 import com.poll.B.Exceptions.PersonNotFoundException;
 import com.poll.B.Repositories.PersonRepository;
 import com.poll.B.Person;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -32,9 +31,9 @@ public class PersonController {
                 .orElseThrow(() -> new PersonNotFoundException(id));
     }
 
-    @GetMapping("/name/{name}")
-    public Person findByName(@PathVariable String name) {
-        return personRepository.findByName(name);
+    @GetMapping("/email/{email}")
+    public Person findByEmail(@PathVariable String email) {
+        return personRepository.findByEmail(email);
     }
 
     @PutMapping("/{id}")
@@ -42,7 +41,7 @@ public class PersonController {
 
         return personRepository.findById(id)
                 .map(user -> {
-                    user.setName(newPerson.getName());
+                    user.setEmail(newPerson.getEmail());
                     user.setPassword(newPerson.getPassword());
                     user.setAdmin(newPerson.isAdmin());
                     return personRepository.save(user);

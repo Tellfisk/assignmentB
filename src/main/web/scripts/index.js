@@ -85,6 +85,7 @@ function signup() {
     });
 
   window.location.href = "dashboard.html";
+
 }
 
 

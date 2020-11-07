@@ -34,15 +34,15 @@ public class RestApiController {
         return (List<Person>) personRepository.findAll();
     }
 
-    @GetMapping("persons/{id}")
+    @GetMapping("/persons/{id}")
     public Person findById(@PathVariable Long id) {
         return personRepository.findById(id)
                 .orElseThrow(() -> new PersonNotFoundException(id));
     }
 
-    @GetMapping("persons/name/{name}")
-    public Person findPersonByName(@PathVariable String name) {
-        return personRepository.findByName(name);
+    @GetMapping("/persons/email/{email}")
+    public Person findPersonByEmail(@PathVariable String email) {
+        return personRepository.findByEmail(email);
     }
 
     @GetMapping("/persons/{id}/votes")
@@ -59,11 +59,11 @@ public class RestApiController {
                 .orElseGet(ArrayList::new);  //TODO: Bad workaround
     }
 
-    @PutMapping("persons/{id}")
+    @PutMapping("/persons/{id}")
     public Person replaceUser(@RequestBody Person newPerson, @PathVariable Long id) {
         return personRepository.findById(id)
                 .map(user -> {
-                    user.setName(newPerson.getName());
+                    user.setEmail(newPerson.getEmail());
                     user.setPassword(newPerson.getPassword());
                     user.setAdmin(newPerson.isAdmin());
                     return personRepository.save(user);
@@ -74,7 +74,7 @@ public class RestApiController {
                 });
     }
 
-    @DeleteMapping("persons/{id}")
+    @DeleteMapping("/persons/{id}")
     public void deletePersonById(@PathVariable long id) {
         personRepository.deleteById(id);
     }
