@@ -41,8 +41,8 @@ async function getSinglePoll() {
         printval = parsePoll(parsedVal)
     }
     infoHer.innerHTML = "<h2>POLL WITH ID " + id + ":</h2><br>" + printval;
-
 }
+
 async function getAllPolls() {
     var currUrl = url + "/polls",
         retVal = await getFunc(currUrl);
@@ -59,7 +59,31 @@ async function getAllPolls() {
 
 }
 
-function parsePoll(poll){
+// HTTP Request
+let request = async (nowUrl, method, body) => {
+    console.log("button pressed");
+
+    const response = await fetch(nowUrl, {
+        method: method,
+        body: body, // string or object
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    const myJson = await response.text(); //extract JSON from the http response
+    console.log(pollJson);
+    return myJson;
+}
+
+async function createPoll(email) {
+    var name = document.getElementById("pname").value;
+    var pollJson = "{ \"name\": \"" + name + "\" }";
+    var currUrl = url + "/polls",
+        retVal = await request(currUrl, 'POST', pollJson);
+    console.log(retVal.value);
+}
+
+function parsePoll(poll) {
     var printString = "";
     printString += "ID: " + poll['id'] + "<br>";
     printString += "Pollname: " + JSON.stringify(poll['name']);

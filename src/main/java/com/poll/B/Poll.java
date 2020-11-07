@@ -7,6 +7,7 @@ import java.util.List;
 @Entity
 public class Poll {
     private String name;
+    private String creator;
     private long fkperson;
 
     @OneToMany(mappedBy = "poll")
@@ -54,6 +55,14 @@ public class Poll {
 
     public void setFkperson(long fkperson) {
         this.fkperson = fkperson;
+    }
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
     }
 }
 

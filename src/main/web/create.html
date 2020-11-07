@@ -17,7 +17,6 @@
 
 <body>
 
-
     <div class="container">
         <h1>Create a poll</h1>
 
@@ -25,36 +24,13 @@
 
         <div class="outerman">
             <div class="getButtons">
-                <button onclick="createPoll()">Create poll</button>
+                <button onclick="createPoll(auth.current)">Create poll</button>
             </div>
         </div>
     </div>
 
     <script>
-        var url = "http://84.215.98.118:8080", infoHer = document.getElementById("infoHer");
 
-        // HTTP Request
-        let postFunc = async (nowUrl) => {
-            console.log("button pressed");
-            var name = document.getElementById("pname").value;
-            var pollJson = "{ \"name\": \"" + name + "\" }";
-            const response = await fetch(nowUrl, {
-                method: 'POST',
-                body: pollJson, // string or object
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            const myJson = await response.text(); //extract JSON from the http response
-            console.log(pollJson);
-            return myJson;
-        }
-
-        async function createPoll() {
-            var currUrl = url + "/polls",
-                retVal = await postFunc(currUrl);
-            console.log(retVal.value);
-        }
     </script>
 
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
