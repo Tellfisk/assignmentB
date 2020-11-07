@@ -9,8 +9,8 @@ cat > $delScript <<EOF
 echo  "Shutting processes down..."
 kill -SIGTERM $pythonId
 kill -SIGTERM $mavenId
-while kill -0 $pythonId $mavenId; do
-	sleep1
+while $(kill -0 $pythonId $mavenId 2>/dev/null); do
+	sleep 1
 done
 echo "Processes shut down."
 rm -f $delScript

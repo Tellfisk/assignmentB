@@ -1,13 +1,13 @@
 ----------------------------------------------------------------
-Tue Nov 03 20:46:54 CET 2020:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0175-8fa5-e098-0000023fa1f8 
-on database directory C:\Users\Tellev2\Documents\GitHub\assignmentB\mydb with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@2626b418 
-Loaded from file:/C:/Users/Tellev2/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
-java.vendor=Oracle Corporation
-java.runtime.version=14.0.2+12-46
-user.dir=C:\Users\Tellev2\Documents\GitHub\assignmentB
-os.name=Windows 10
-os.arch=amd64
-os.version=10.0
+Sat Nov 07 04:05:04 GMT 2020:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.2.0 - (1828579): instance a816c00e-0175-a0e0-fe01-0000008f7390 
+on database directory /home/pi/DAT250/assignmentB/mydb with class loader jdk.internal.loader.ClassLoaders$AppClassLoader@19bb367 
+Loaded from file:/home/pi/.m2/repository/org/apache/derby/derby/10.14.2.0/derby-10.14.2.0.jar
+java.vendor=Raspbian
+java.runtime.version=11.0.8+10-post-Raspbian-1deb10u1
+user.dir=/home/pi/DAT250/assignmentB
+os.name=Linux
+os.arch=arm
+os.version=5.4.51-v7+
 derby.system.home=null
 Database Class Loader started - derby.database.classpath=''
