@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Dashboard</title>
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans:300,400" rel="stylesheet">
+    <link href="css/styling.css" rel="stylesheet">
+    <meta charset="UTF-8">
+
+    <nav>
+        <button onclick="logout()">Logout</button>
+        <button onclick="location.href='dashboard.html'">Dashboard</button>
+        <button onclick="location.href='view.html'">View polls</button>
+        <button onclick="location.href='...'">Create poll</button>
+    </nav>
+</head>
+
+<body>
+    <div class="container">
+        <h1>WELCOME</h1>
+        <div>
+            <button>Add poll</button>
+            <a href="view.html"><button>View polls</button></a>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-firestore.js"></script>
+    <script src="scripts/index.js"></script>
+</body>
+
+</html>
