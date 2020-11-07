@@ -9,11 +9,11 @@ public class Person {
     private String password;
     private boolean isAdmin;
 
-    @OneToMany(mappedBy = "person")
-    private List<Vote> votes;
+/*    @OneToMany(mappedBy = "person")
+    private List<Vote> votes;*/
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     public Person(){}
@@ -56,14 +56,14 @@ public class Person {
         this.password = password;
     }
 
-    public void setVotes(List<Vote> votes){
+/*    public void setVotes(List<Vote> votes){
         votes.addAll(this.votes);
         this.votes = votes;
     }
 
     public List<Vote> getVotes() {
         return votes;
-    }
+    }*/
 }
 
 
