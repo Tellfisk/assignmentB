@@ -110,8 +110,16 @@ async function createPoll(email, person_id) {
 async function createPerson() {
     var email = document.getElementById("email_reg").value;
     var pollJson = '{ \"email\": \"' + email + '\" }';
-    var currUrl = url + "/persons",
-        retVal = await request(currUrl, 'POST', pollJson);
+    var currUrl = url + "/persons"
+    var retval = await request(currUrl, 'POST', pollJson);
+}
+
+async function createVote(yes, poll_id, person_id) {
+    var pollJson = '{ \"yes\": \"' + yes + '\", ' +
+                     '\"fkpoll\": \"' + poll_id + '\", ' +
+                     '\"fkperson\": \"' + person_id + '\" }';
+    var currUrl = url + "/votes"
+    var retVal = await request(currUrl, 'POST', pollJson);
 }
 
 function parsePoll(poll) {
