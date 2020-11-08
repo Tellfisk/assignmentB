@@ -136,6 +136,8 @@ function parsePoll(poll) {
     return printString;
 }
 
-function parseVotes(){
-
+function parseVotes(vote){
+    var printString = "";
+    printString += "<a>" + vote['yes'] + "</a><br><br>"
+    return printString;
 }
