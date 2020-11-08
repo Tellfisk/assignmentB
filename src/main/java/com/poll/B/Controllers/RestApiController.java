@@ -63,11 +63,10 @@ public class RestApiController {
     @PutMapping("/persons/{id}")
     public Person replaceUser(@RequestBody Person newPerson, @PathVariable Long id) {
         return personRepository.findById(id)
-                .map(user -> {
-                    user.setEmail(newPerson.getEmail());
-                    user.setPassword(newPerson.getPassword());
-                    user.setAdmin(newPerson.isAdmin());
-                    return personRepository.save(user);
+                .map(person -> {
+                    person.setEmail(newPerson.getEmail());
+                    person.setAdmin(newPerson.isAdmin());
+                    return personRepository.save(person);
                 })
                 .orElseGet(() -> {
                     newPerson.setId(id);
