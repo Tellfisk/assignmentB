@@ -110,7 +110,8 @@ async function createPerson() {
 function parsePoll(poll) {
     var printString = "";
     printString += "ID: " + poll['id'] + "<br>";
-    printString += "Pollname: " + JSON.stringify(poll['name']);
+    printString += "Name: " + JSON.stringify(poll['name']);
     printString += "<br>Votes: " + poll['votes'].length + "<br><br>";
+    printString += "<button onclick=\"location.href='view_poll.html'\">Vote</button>"
     return printString;
 }
