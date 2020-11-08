@@ -14,13 +14,23 @@
         <button onclick="location.href='create_poll.html'">Create poll</button>
     </nav>
 </head>
+<div class="container">
+    <h1 id="title"></h1>
 
+</div>
 
-    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-firestore.js"></script>
-    <script src="scripts/auth.js"></script>
-    <script src="scripts/http.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-firestore.js"></script>
+<script src="scripts/auth.js"></script>
+<script src="scripts/http.js"></script>
+
+<script>
+    let params = new URLSearchParams(location.search);
+    poll_id = params.get('id');
+    poll_name = params.get('name');
+    title.innerHTML = poll_name
+</script>
 </body>
 
 </html>
