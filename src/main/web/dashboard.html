@@ -30,7 +30,7 @@
     <script>
         function getUserEmail(user) {
             email = user.email;
-            console.log(email)
+            console.log(email);
             getPersonIdByEmail(email).then(id => {
                 getAllPollsByUser(id);
             });

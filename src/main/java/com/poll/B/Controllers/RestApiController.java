@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.function.Supplier;
 
@@ -123,6 +124,26 @@ public class RestApiController {
                 .orElse(new ResponseEntity<VoteDistribution>(HttpStatus.NO_CONTENT));  //TODO: Bad workaround
     }
 
+    @GetMapping("/polls/distribution")
+    public ResponseEntity<HashMap<Long, VoteDistribution>> getAllDistributionFromPolls() {
+        List<Poll> polls = (List<Poll>) pollRepository.findAll();
+        HashMap<Long, VoteDistribution> distlist = new HashMap<>();
+        for (Poll p : polls) {
+            List<Vote> votes = voteRepository.findAllByFkpoll(p.getId());
+            int yes = 0;
+            int no = 0;
+            for (Vote v : votes) {
+                if (v.isYes()) {
+                    yes++;
+                } else {
+                    no++;
+                }
+            }
+            distlist.put(p.getId(), new VoteDistribution(yes, no));
+        }
+        return new ResponseEntity<HashMap<Long, VoteDistribution>>(distlist,  HttpStatus.OK);
+    }
+
     @GetMapping("/polls/{id}/hasVoted/{person_id}")
     public ResponseEntity<VotedInThisPoll> getVotedInThisPoll(@PathVariable Long id, @PathVariable Long person_id) {
         return pollRepository.findById(id)
@@ -140,6 +161,7 @@ public class RestApiController {
                 })
                 .orElse(new ResponseEntity<VotedInThisPoll>(HttpStatus.NO_CONTENT));  //TODO: Bad workaround
     }
+
 
     @GetMapping("/polls/name/{name}")
     public Poll findByName(@PathVariable String name) {
