@@ -23,7 +23,7 @@
     <div class="getButtons">
         <button type="submit" onclick="vote(false)">No</button>
     </div>
-
+    <canvas id="myChart" width="400" height="400"></canvas>
     <p id="infoHer"></p>
 
 </div>
@@ -39,8 +39,7 @@
     poll_id = params.get('id');
     poll_name = params.get('name');
     getVotes(poll_id);
-    title.innerHTML = poll_name
-
+    title.innerHTML = poll_name;
 
     function vote(yes) {
         auth.onAuthStateChanged(user => {
@@ -49,8 +48,10 @@
                 let email = user.email;
                 console.log(email);
                 getPersonIdByEmail(email).then(person_id => {
-                    console.log("id_poll " + poll_id + " id_person " + person_id + ", email " + email);
-                    createVote(yes, poll_id, person_id);
+                    if (!hasVoted(poll_id, person_id)) {
+                        console.log("id_poll " + poll_id + " id_person " + person_id + ", email " + email);
+                        createVote(yes, poll_id, person_id);
+                    }
                 });
 
             }

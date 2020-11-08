@@ -129,7 +129,10 @@ async function createVote(yes, poll_id, person_id) {
 
 async function hasVoted(poll_id, person_id) {
     var currUrl = url + '/polls/' + poll_id + '/hasVoted/' + person_id;
+<<<<<<< HEAD
+=======
 
+>>>>>>> a71f5bf7d9a6712a64b1d1df2d325b9ce1e98297
 }
 
 function parsePoll(poll) {
