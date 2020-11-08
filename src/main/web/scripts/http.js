@@ -5,7 +5,6 @@ var url = "http://84.215.98.118:8080",
 // Generic HTTP Request //
 
 let request = async (nowUrl, method, body) => {
-    console.log("button pressed");
     let response;
     if (method === "GET" && body === "") {
         response = await fetch(nowUrl, {
@@ -40,10 +39,8 @@ async function getSinglePoll() {
 
     var currUrl = url + "/polls/" + id;
     var retVal = await request(currUrl, 'GET', "");
-    console.log(retVal.value);
 
     // if(!Object.keys(retVal).length){
-    console.log(retVal);
 
     if (retVal === ""){
         printval = "No poll with this id.";
@@ -58,7 +55,6 @@ async function getSinglePoll() {
 async function getPersonIdByEmail(email) {
     var currUrl = url + "/persons/email/" + email,
         retVal = await request(currUrl, 'GET', "");
-    console.log(retVal.value);
 
     var parsedVal = JSON.parse(retVal);
     var person_id = JSON.stringify(parsedVal['id']);
@@ -69,10 +65,8 @@ async function getPersonIdByEmail(email) {
 async function getAllPolls() {
     var currUrl = url + "/polls",
         retVal = await request(currUrl, 'GET', "");
-    console.log(retVal);
     var myArr = JSON.parse(retVal);
 
-    console.log(myArr);
     var printString = "";
     myArr.forEach(currPoll => {
         printString += parsePoll(currPoll);
@@ -84,10 +78,9 @@ async function getAllPolls() {
 async function getAllPollsByUser(id) {
     var currUrl = url + "/polls/person/" + id,
         retVal = await request(currUrl, 'GET', "");
-    console.log(retVal);
+    
     var myArr = JSON.parse(retVal);
 
-    console.log(myArr);
     var printString = "";
     myArr.forEach(currPoll => {
         printString += parsePoll(currPoll);
@@ -100,13 +93,12 @@ async function getAllPollsByUser(id) {
 async function getVotes(id) {
     var currUrl = url + "/polls/" + id + "/votes",
         retVal = await request(currUrl, 'GET', "");
-    console.log(retVal);
+    
     var myArr = JSON.parse(retVal);
 
-    console.log(myArr);
     var printString = "";
-    myArr.forEach(currPoll => {
-        printString += parsePoll(currPoll);
+    myArr.forEach(currVote => {
+        printString += parsePoll(currVote);
     });
 }
 
@@ -117,7 +109,7 @@ async function createPoll(email, person_id) {
                      '\"fkperson\": \"' + person_id + '\" }';
     var currUrl = url + "/polls",
         retVal = await request(currUrl, 'POST', pollJson);
-    console.log(retVal.value);
+    
 }
 
 async function createPerson() {
@@ -137,7 +129,6 @@ async function createVote(yes, poll_id, person_id) {
 
 function parsePoll(poll) {
     var printString = "";
-    printString += "ID: " + poll['id'] + "<br>";
     printString += "Name: " + JSON.stringify(poll['name']);
     printString += "<br>Votes: " + poll['votes'].length + "<br>";
 
@@ -147,5 +138,5 @@ function parsePoll(poll) {
 }
 
 function parseVotes(){
-    
+
 }
