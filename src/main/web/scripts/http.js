@@ -38,8 +38,8 @@ async function getSinglePoll() {
         return;
     }
 
-    var currUrl = url + "/polls/"+id,
-        retVal = await request(currUrl, 'GET', "");
+    var currUrl = url + "/polls/" + id;
+    var retVal = await request(currUrl, 'GET', "");
     console.log(retVal.value);
 
     // if(!Object.keys(retVal).length){
@@ -55,14 +55,15 @@ async function getSinglePoll() {
     infoHer.innerHTML = "<h2>POLL WITH ID " + id + ":</h2><br>" + printval;
 }
 
-async function getPersonByEmail(email) {
-    var currUrl = url + "/persons/" + email,
+async function getPersonIdByEmail(email) {
+    var currUrl = url + "/persons/email/" + email,
         retVal = await request(currUrl, 'GET', "");
     console.log(retVal.value);
 
     var parsedVal = JSON.parse(retVal);
     var person_id = JSON.stringify(parsedVal['id']);
-    getAllPollsByUser(person_id);
+
+    return person_id;
 }
 
 async function getAllPolls() {

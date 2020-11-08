@@ -24,7 +24,7 @@
 
         <div class="outerman">
             <div class="getButtons">
-                <button onclick="createPoll(auth.currentUser.email)">Create poll</button>
+                <button onclick="go();">Create poll</button>
             </div>
         </div>
     </div>
@@ -36,6 +36,26 @@
     <script src="scripts/auth.js"></script>
     <script src="scripts/http.js"></script>
     <script>
+        var hei;
+        function getUserEmail(user) {
+            hei = user.email;
+            email = user.email;
+            //console.log(email)
+            console.log(hei);
+            //createPoll(hei);
+        }
+
+        function go() {
+            auth.onAuthStateChanged(user => {
+                if (user) {
+                    // User is signed in.
+                    getUserEmail(user);
+                }
+                else {
+                    // User is signed out.
+                }
+            });
+        }
 
     </script>
 
