@@ -150,6 +150,16 @@ public class RestApiController {
         return poll;
     }
 
+    @GetMapping("/polls/person/{person_id}")
+    public List<Poll> findAllPollsByFkperson(@PathVariable long person_id) {
+        List<Poll> polls = (List<Poll>) pollRepository.findAllByFkperson(person_id);
+        for (Poll poll : polls) {
+            List<Vote> votes = (List<Vote>) voteRepository.findAllByFkpoll(poll.getId());
+            poll.setVotes(votes);
+        }
+        return polls;
+    }
+
     @GetMapping("/polls/{id}")
     public Poll findPollById(@PathVariable long id) {
         Poll poll = pollRepository.findById(id);
