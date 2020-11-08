@@ -100,7 +100,7 @@ async function getAllPollsByUser(id) {
 async function createPoll(email, person_id) {
     var name = document.getElementById("pname").value;
     var pollJson = '{ \"name\": \"' + name + '\", ' +
-                     '\"email\": \"' + email + '\", ' +
+                     '\"creator\": \"' + email + '\", ' +
                      '\"fkperson\": \"' + person_id + '\" }';
     var currUrl = url + "/polls",
         retVal = await request(currUrl, 'POST', pollJson);

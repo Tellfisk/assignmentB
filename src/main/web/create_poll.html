@@ -42,12 +42,11 @@
             auth.onAuthStateChanged(user => {
                 if (user) {
                     // User is signed in.
-                    email = user.email;
-                    //console.log(email)
+                    let email = user.email;
                     console.log(email);
                     getPersonIdByEmail(email).then(id => {
-                        console.log("id" + id + ", email" + email);
-                        //createPoll(email, id);
+                        console.log("id " + id + ", email " + email);
+                        createPoll(email, id);
                     });
 
                 }
