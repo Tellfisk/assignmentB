@@ -2,13 +2,14 @@ var url = "http://84.215.98.118:8080",
     infoHer = document.getElementById("infoHer");
 
 
-// Fetching function
-let getFunc = async (nowUrl) => {
+// Generic HTTP Request //
+
+let request = async (nowUrl, method, body) => {
     console.log("button pressed");
 
     const response = await fetch(nowUrl, {
-        method: 'GET',
-        //body: myBody, // string or object
+        method: method,
+        body: body, // string or object
         headers: {
             'Content-Type': 'application/json'
         }
@@ -17,7 +18,9 @@ let getFunc = async (nowUrl) => {
     return myJson;
 }
 
-// Specific functions
+
+// Unique REST API calls //
+
 async function getSinglePoll() {
     var id = document.getElementById("pollIdInp").value; // CHANGE
 
@@ -27,7 +30,7 @@ async function getSinglePoll() {
     }
 
     var currUrl = url + "/polls/"+id,
-        retVal = await getFunc(currUrl);
+        retVal = await request(currUrl, 'GET', "");
     console.log(retVal.value);
 
     // if(!Object.keys(retVal).length){
@@ -45,7 +48,7 @@ async function getSinglePoll() {
 
 async function getAllPolls() {
     var currUrl = url + "/polls",
-        retVal = await getFunc(currUrl);
+        retVal = await request(currUrl, 'GET', "");
     console.log(retVal);
     var myArr = JSON.parse(retVal);
 
@@ -59,20 +62,20 @@ async function getAllPolls() {
 
 }
 
-// HTTP Request
+async function getAllPollsByUser() {
+    var currUrl = url + "/polls/person/",
+        retVal = await request(currUrl, 'GET', "");
+    console.log(retVal);
+    var myArr = JSON.parse(retVal);
 
-let request = async (nowUrl, method, body) => {
-    console.log("button pressed");
-
-    const response = await fetch(nowUrl, {
-        method: method,
-        body: body, // string or object
-        headers: {
-            'Content-Type': 'application/json'
-        }
+    console.log(myArr);
+    var printString = "";
+    myArr.forEach(currPoll => {
+        printString += parsePoll(currPoll);
     });
-    const myJson = await response.text(); //extract JSON from the http response
-    return myJson;
+
+    infoHer.innerHTML = "<h2>ALL POLLS:</h2> <br> <p style='text-align: left; margin-left: 8px;' >"+printString+"</p>";
+
 }
 
 async function createPoll(email) {
