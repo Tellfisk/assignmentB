@@ -1,13 +1,10 @@
 package com.poll.B.Controllers;
 
+import com.poll.B.*;
 import com.poll.B.Exceptions.PersonNotFoundException;
-import com.poll.B.Person;
-import com.poll.B.Poll;
 import com.poll.B.Repositories.PersonRepository;
 import com.poll.B.Repositories.PollRepository;
 import com.poll.B.Repositories.VoteRepository;
-import com.poll.B.Vote;
-import com.poll.B.VoteDistribution;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -125,6 +122,24 @@ public class RestApiController {
                     return new ResponseEntity<VoteDistribution>(dist,  HttpStatus.OK);
                 })
                 .orElse(new ResponseEntity<VoteDistribution>(HttpStatus.NO_CONTENT));  //TODO: Bad workaround
+    }
+
+    @GetMapping("/polls/{id}/hasVoted/{person_id}")
+    public ResponseEntity<VotedInThisPoll> getVotedInThisPoll(@PathVariable Long id, @PathVariable Long person_id) {
+        return pollRepository.findById(id)
+                .map(poll -> {
+                    List<Vote> votes = voteRepository.findAllByFkpoll(poll.getId());
+                    boolean hasVoted = false;
+                    for (Vote v : votes) {
+                        if (v.getFkperson() == person_id) {
+                            hasVoted = true;
+                            break;
+                        }
+                    }
+                    VotedInThisPoll vitp = new VotedInThisPoll(hasVoted);
+                    return new ResponseEntity<VotedInThisPoll>(vitp,  HttpStatus.OK);
+                })
+                .orElse(new ResponseEntity<VotedInThisPoll>(HttpStatus.NO_CONTENT));  //TODO: Bad workaround
     }
 
     @GetMapping("/polls/name/{name}")
