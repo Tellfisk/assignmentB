@@ -110,14 +110,15 @@ async function createPerson() {
     var pollJson = '{ \"email\": \"' + email + '\" }';
     var currUrl = url + "/persons",
         retVal = await request(currUrl, 'POST', pollJson);
-    console.log(retVal.value);
 }
 
 function parsePoll(poll) {
     var printString = "";
     printString += "ID: " + poll['id'] + "<br>";
     printString += "Name: " + JSON.stringify(poll['name']);
-    printString += "<br>Votes: " + poll['votes'].length + "<br><br>";
-    printString += "<button onclick=\"location.href='view_poll.html'\">Vote</button>"
+    printString += "<br>Votes: " + poll['votes'].length + "<br>";
+
+    url = "\"view_poll.html?id=" +  poll['id'] + "&name=" + poll['name'];
+    printString += "<a href=" + url + " \">Vote</a><br><br>"
     return printString;
 }
