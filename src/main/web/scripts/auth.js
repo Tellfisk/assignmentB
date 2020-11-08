@@ -79,7 +79,7 @@ function signup() {
   auth.createUserWithEmailAndPassword(email, password)
     .then(function success(userData) {
       // Potentially do something with userData
-      // window.location.href = "dashboard.html";
+      window.location.href = "dashboard.html";
     }).catch(function failure(error) {
 
       var errorCode = error.code;

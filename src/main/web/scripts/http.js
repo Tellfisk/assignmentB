@@ -81,7 +81,7 @@ async function getAllPolls() {
 }
 
 async function getAllPollsByUser(id) {
-    var currUrl = url + "/polls/person/" + 0,//id,
+    var currUrl = url + "/polls/person/" + id,
         retVal = await request(currUrl, 'GET', "");
     console.log(retVal);
     var myArr = JSON.parse(retVal);
@@ -109,14 +109,16 @@ async function createPerson() {
     var pollJson = '{ \"email\": \"' + email + '\" }';
     var currUrl = url + "/persons",
         retVal = await request(currUrl, 'POST', pollJson);
-    console.log(retVal.value);
 }
 
 function parsePoll(poll) {
     var printString = "";
     printString += "ID: " + poll['id'] + "<br>";
     printString += "Name: " + JSON.stringify(poll['name']);
-    printString += "<br>Votes: " + poll['votes'].length + "<br><br>";
-    printString += "<button onclick=\"location.href='view_poll.html'\">Vote</button>"
+    printString += "<br>Votes: " + poll['votes'].length + "<br>";
+
+    console.log(JSON.stringify(poll['name']));
+    redirect = "\"view_poll.html?id=" +  poll['id'] + "&name=" + poll['name'];
+    printString += "<a href=" + redirect + " \">Vote</a><br><br>"
     return printString;
 }
