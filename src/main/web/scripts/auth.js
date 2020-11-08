@@ -13,14 +13,13 @@ var config = {
 firebase.initializeApp(config);
 // Auth reference
 const auth = firebase.auth();
-var email;
 
 auth.onAuthStateChanged(function (user) {
   if (user) {
     // User is signed in
 
     var user = auth.currentUser;
-    setmail(user.email);
+  
     if (user != null) {
       // Valid user
 
@@ -58,17 +57,17 @@ function login() {
     }
     console.log(error);
   });
-  console.log("hei login")
+  
 }
 
 function logout() {
   auth.signOut().then(function () {
-    console.log('Signed Out');
+    window.location.href = "login.html";
   }, function (error) {
     console.error('Sign Out Error', error);
   });
 
-  window.location.href = "login.html";
+  
 }
 
 
@@ -80,7 +79,7 @@ function signup() {
   auth.createUserWithEmailAndPassword(email, password)
     .then(function success(userData) {
       // Potentially do something with userData
-      window.location.href = "dashboard.html";
+      // window.location.href = "dashboard.html";
     }).catch(function failure(error) {
 
       var errorCode = error.code;
