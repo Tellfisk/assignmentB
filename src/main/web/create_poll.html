@@ -36,20 +36,20 @@
     <script src="scripts/auth.js"></script>
     <script src="scripts/http.js"></script>
     <script>
-        var hei;
-        function getUserEmail(user) {
-            hei = user.email;
-            email = user.email;
-            //console.log(email)
-            console.log(hei);
-            //createPoll(hei);
-        }
+
 
         function go() {
             auth.onAuthStateChanged(user => {
                 if (user) {
                     // User is signed in.
-                    getUserEmail(user);
+                    email = user.email;
+                    //console.log(email)
+                    console.log(email);
+                    getPersonIdByEmail(email).then(id => {
+                        console.log("id" + id + ", email" + email);
+                        //createPoll(email, id);
+                    });
+
                 }
                 else {
                     // User is signed out.
