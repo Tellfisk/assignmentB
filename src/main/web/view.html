@@ -46,7 +46,9 @@
         getAllPolls();
 
         function getUserEmail(user) {
-            //email = user.email;
+            email = user.email;
+            console.log(email)
+            getPersonByEmail(email)
         }
 
         auth.onAuthStateChanged(user => {

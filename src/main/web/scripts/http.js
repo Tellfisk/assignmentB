@@ -6,14 +6,23 @@ var url = "http://84.215.98.118:8080",
 
 let request = async (nowUrl, method, body) => {
     console.log("button pressed");
-
-    const response = await fetch(nowUrl, {
-        method: method,
-        body: body, // string or object
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    });
+    let response;
+    if (body === "") {
+        response = await fetch(nowUrl, {
+            method: method,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+    } else {
+        response = await fetch(nowUrl, {
+            method: method,
+            body: body, // string or object
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+    }
     const myJson = await response.text(); //extract JSON from the http response
     return myJson;
 }
@@ -46,6 +55,10 @@ async function getSinglePoll() {
     infoHer.innerHTML = "<h2>POLL WITH ID " + id + ":</h2><br>" + printval;
 }
 
+async function getPersonByEmail(email) {
+
+}
+
 async function getAllPolls() {
     var currUrl = url + "/polls",
         retVal = await request(currUrl, 'GET', "");
@@ -62,7 +75,7 @@ async function getAllPolls() {
 
 }
 
-async function getAllPollsByUser() {
+async function getAllPollsByUser(id) {
     var currUrl = url + "/polls/person/",
         retVal = await request(currUrl, 'GET', "");
     console.log(retVal);
@@ -82,6 +95,14 @@ async function createPoll(email) {
     var name = document.getElementById("pname").value;
     var pollJson = "{ \"name\": \"" + name + "\", \"email\": \"" + email + "\" }";
     var currUrl = url + "/polls",
+        retVal = await request(currUrl, 'POST', pollJson);
+    console.log(retVal.value);
+}
+
+async function createPerson() {
+    var email = document.getElementById("email_reg").value;
+    var pollJson = "{ \"email:\": \"" + email + "\" }";
+    var currUrl = url + "/persons",
         retVal = await request(currUrl, 'POST', pollJson);
     console.log(retVal.value);
 }

@@ -1,4 +1,3 @@
-//import * as http from "http.js"
 
 // Firebase config
 var config = {
@@ -81,8 +80,6 @@ function signup() {
   auth.createUserWithEmailAndPassword(email, password)
     .then(function success(userData) {
       // Potentially do something with userData
-      //var pollJson = "{ \"email:\": \"" + email + "\" }";
-      //request(url + "/persons", 'POST', pollJson);
       window.location.href = "dashboard.html";
     }).catch(function failure(error) {
 
@@ -91,7 +88,5 @@ function signup() {
       console.log(errorCode + " " + errorMessage);
 
     });
-
-
 
 }
