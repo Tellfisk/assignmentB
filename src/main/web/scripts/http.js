@@ -78,7 +78,7 @@ async function getAllPolls() {
 async function getAllPollsByUser(id) {
     var currUrl = url + "/polls/person/" + id,
         retVal = await request(currUrl, 'GET', "");
-    
+
     var myArr = JSON.parse(retVal);
 
     var printString = "";
@@ -97,8 +97,9 @@ async function getVotes(id) {
 
     var printString = "";
     myArr.forEach(currVote => {
-        printString += parsePoll(currVote);
+        printString += parseVotes(currVote);
     });
+    infoHer.innerHTML = "<h2>ALL VOTES:</h2> <br> <p style='text-align: left; margin-left: 8px;' >"+printString+"</p>";
 }
 
 async function createPoll(email, person_id) {
@@ -108,13 +109,12 @@ async function createPoll(email, person_id) {
                      '\"fkperson\": \"' + person_id + '\" }';
     var currUrl = url + "/polls",
         retVal = await request(currUrl, 'POST', pollJson);
-    
 }
 
 async function createPerson() {
     var email = document.getElementById("email_reg").value;
     var pollJson = '{ \"email\": \"' + email + '\" }';
-    var currUrl = url + "/persons"
+    var currUrl = url + "/persons";
     var retval = await request(currUrl, 'POST', pollJson);
 }
 
@@ -122,8 +122,13 @@ async function createVote(yes, poll_id, person_id) {
     var pollJson = '{ \"yes\": \"' + yes + '\", ' +
                      '\"fkpoll\": \"' + poll_id + '\", ' +
                      '\"fkperson\": \"' + person_id + '\" }';
-    var currUrl = url + "/votes"
+    var currUrl = url + "/votes";
     var retVal = await request(currUrl, 'POST', pollJson);
+}
+
+async function hasVoted(poll_id, person_id) {
+    var currUrl = url + '/polls/' + poll_id + '/hasVoted/' + person_id;
+    
 }
 
 function parsePoll(poll) {
@@ -139,5 +144,6 @@ function parsePoll(poll) {
 function parseVotes(vote){
     var printString = "";
     printString += "<a>" + vote['yes'] + "</a><br><br>"
+    console.log(vote['yes']);
     return printString;
 }

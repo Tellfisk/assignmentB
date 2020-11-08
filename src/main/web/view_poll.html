@@ -17,6 +17,15 @@
 <div class="container">
     <h1 id="title"></h1>
 
+    <div class="getButtons">
+        <button type="submit" onclick="vote(true)">Yes</button>
+    </div>
+    <div class="getButtons">
+        <button type="submit" onclick="vote(false)">No</button>
+    </div>
+
+    <p id="infoHer"></p>
+
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
@@ -29,8 +38,27 @@
     let params = new URLSearchParams(location.search);
     poll_id = params.get('id');
     poll_name = params.get('name');
-    votes = 
+    getVotes(poll_id);
     title.innerHTML = poll_name
+
+
+    function vote(yes) {
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                // User is signed in.
+                let email = user.email;
+                console.log(email);
+                getPersonIdByEmail(email).then(person_id => {
+                    console.log("id_poll " + poll_id + " id_person " + person_id + ", email " + email);
+                    createVote(yes, poll_id, person_id);
+                });
+
+            }
+            else {
+                // User is signed out.
+            }
+        });
+    }
 </script>
 </body>
 
