@@ -87,7 +87,6 @@ async function getAllPollsByUser(id) {
     });
 
     infoHer.innerHTML = "<h2>ALL POLLS:</h2> <br> <p style='text-align: left; margin-left: 8px;' >"+printString+"</p>";
-
 }
 
 async function getVotes(id) {
