@@ -97,6 +97,19 @@ async function getAllPollsByUser(id) {
 
 }
 
+async function getVotes(id) {
+    var currUrl = url + "/polls/" + id + "/votes",
+        retVal = await request(currUrl, 'GET', "");
+    console.log(retVal);
+    var myArr = JSON.parse(retVal);
+
+    console.log(myArr);
+    var printString = "";
+    myArr.forEach(currPoll => {
+        printString += parsePoll(currPoll);
+    });
+}
+
 async function createPoll(email, person_id) {
     var name = document.getElementById("pname").value;
     var pollJson = '{ \"name\": \"' + name + '\", ' +
@@ -123,4 +136,8 @@ function parsePoll(poll) {
     url = "\"view_poll.html?id=" +  poll['id'] + "&name=" + poll['name'];
     printString += "<a href=" + url + " \">Vote</a><br><br>"
     return printString;
+}
+
+function parseVotes(){
+    
 }
