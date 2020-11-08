@@ -48,10 +48,13 @@
                 let email = user.email;
                 console.log(email);
                 getPersonIdByEmail(email).then(person_id => {
-                    if (!hasVoted(poll_id, person_id)) {
-                        console.log("id_poll " + poll_id + " id_person " + person_id + ", email " + email);
-                        createVote(yes, poll_id, person_id);
-                    }
+                    hasVoted(poll_id, person_id).then(voted => {
+                        console.log(voted)
+                        if (!voted) {
+                            console.log("id_poll " + poll_id + " id_person " + person_id + ", email " + email);
+                            createVote(yes, poll_id, person_id);
+                        }
+                    })
                 });
 
             }
