@@ -42,7 +42,6 @@ public class PersonController {
         return personRepository.findById(id)
                 .map(user -> {
                     user.setEmail(newPerson.getEmail());
-                    user.setPassword(newPerson.getPassword());
                     user.setAdmin(newPerson.isAdmin());
                     return personRepository.save(user);
                 })

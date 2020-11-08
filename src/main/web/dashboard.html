@@ -29,7 +29,22 @@
     <script src="scripts/auth.js"></script>
     <script src="scripts/http.js"></script>
     <script>
-       // getAllPollsByUser();
+        function getUserEmail(user) {
+            email = user.email;
+            console.log(email)
+            getPersonByEmail(email)
+        }
+
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                // User is signed in.
+                getUserEmail(user);
+            }
+            else {
+                // User is signed out.
+            }
+        });
+        console.log(email)
     </script>
 </body>
 

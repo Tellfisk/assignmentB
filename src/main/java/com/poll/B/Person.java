@@ -5,7 +5,6 @@ import javax.persistence.*;
 @Entity
 public class Person {
     private String email;
-    private String password;
     private boolean isAdmin;
 
     @Id
@@ -14,9 +13,8 @@ public class Person {
 
     public Person(){}
 
-    public Person(String email, String password, boolean isAdmin){
+    public Person(String email, boolean isAdmin){
         this.email = email;
-        this.password = password;
         this.isAdmin = isAdmin;
     }
 
@@ -44,22 +42,6 @@ public class Person {
         isAdmin = admin;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-/*    public void setVotes(List<Vote> votes){
-        votes.addAll(this.votes);
-        this.votes = votes;
-    }
-
-    public List<Vote> getVotes() {
-        return votes;
-    }*/
 }
 
 
