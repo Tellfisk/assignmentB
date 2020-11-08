@@ -113,6 +113,7 @@ async function createPoll(email, person_id) {
 
 async function createPerson() {
     var email = document.getElementById("email_reg").value;
+    email = email.toLowerCase();
     var pollJson = '{ \"email\": \"' + email + '\" }';
     var currUrl = url + "/persons";
     var retval = await request(currUrl, 'POST', pollJson);

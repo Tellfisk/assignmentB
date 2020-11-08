@@ -118,16 +118,16 @@ public class RestApiController {
                             no++;
                         }
                     }
-                    VoteDistribution dist = new VoteDistribution(yes, no);
+                    VoteDistribution dist = new VoteDistribution(poll.getId(), yes, no);
                     return new ResponseEntity<VoteDistribution>(dist,  HttpStatus.OK);
                 })
                 .orElse(new ResponseEntity<VoteDistribution>(HttpStatus.NO_CONTENT));  //TODO: Bad workaround
     }
 
     @GetMapping("/polls/distribution")
-    public ResponseEntity<HashMap<Long, VoteDistribution>> getAllDistributionFromPolls() {
+    public ResponseEntity<List<VoteDistribution>> getAllDistributionFromPolls() {
         List<Poll> polls = (List<Poll>) pollRepository.findAll();
-        HashMap<Long, VoteDistribution> distlist = new HashMap<>();
+        List<VoteDistribution> distlist = new ArrayList<>();
         for (Poll p : polls) {
             List<Vote> votes = voteRepository.findAllByFkpoll(p.getId());
             int yes = 0;
@@ -139,9 +139,9 @@ public class RestApiController {
                     no++;
                 }
             }
-            distlist.put(p.getId(), new VoteDistribution(yes, no));
+            distlist.add(new VoteDistribution(p.getId(), yes, no));
         }
-        return new ResponseEntity<HashMap<Long, VoteDistribution>>(distlist,  HttpStatus.OK);
+        return new ResponseEntity<List<VoteDistribution>>(distlist,  HttpStatus.OK);  //TODO: Bad workaround
     }
 
     @GetMapping("/polls/{id}/hasVoted/{person_id}")
