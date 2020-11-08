@@ -101,7 +101,7 @@ async function createPoll(email) {
 
 async function createPerson() {
     var email = document.getElementById("email_reg").value;
-    var pollJson = "{ \"email:\": \"" + email + "\" }";
+    var pollJson = "{ \"email\": \"" + email + "\" }";
     var currUrl = url + "/persons",
         retVal = await request(currUrl, 'POST', pollJson);
     console.log(retVal.value);
