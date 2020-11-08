@@ -1,8 +1,6 @@
 
 body{
     background-color: #191919;
-    display: flex;
-    justify-content: center;
     text-align: center;
     font-family: 'Work Sans', sans-serif;
     font-weight: 300;
@@ -10,10 +8,14 @@ body{
     
 }
 
-.container{
-    padding-top: 100px;
-    max-width: 1200px;
-    margin: 0 auto;
+nav {
+  display: flex; 
+  justify-content: space-around;
+  float: right;
+}
+
+.container {
+  padding-top: 100px;
 }
 
 li {
@@ -62,7 +64,7 @@ input[type=number]{
 }
 
 .getButtons{
-    width: 50%;
+    
 }
 
 #infoHer{
