@@ -117,8 +117,7 @@ function parsePoll(poll) {
     printString += "Name: " + JSON.stringify(poll['name']);
     printString += "<br>Votes: " + poll['votes'].length + "<br>";
 
-    console.log(JSON.stringify(poll['name']));
-    redirect = "\"view_poll.html?id=" +  poll['id'] + "&name=" + poll['name'];
-    printString += "<a href=" + redirect + " \">Vote</a><br><br>"
+    url = "\"view_poll.html?id=" +  poll['id'] + "&name=" + poll['name'];
+    printString += "<a href=" + url + " \">Vote</a><br><br>"
     return printString;
 }
