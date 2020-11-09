@@ -53,11 +53,15 @@ async function getSinglePoll() {
 }
 
 async function getPersonIdByEmail(email) {
+    // Caught in promise
     var currUrl = url + "/persons/email/" + email,
         retVal = await request(currUrl, 'GET', "");
-
+    
     var parsedVal = JSON.parse(retVal);
+    console.log(parsedVal + "yo");
     var person_id = JSON.stringify(parsedVal['id']);
+    console.log(person_id);
+
 
     return person_id;
 }

@@ -14,6 +14,12 @@ nav {
   float: right;
 }
 
+.chart {
+  width:600px !important;
+  height:600px !important;
+  
+}
+
 .container {
   padding-top: 100px;
 }
