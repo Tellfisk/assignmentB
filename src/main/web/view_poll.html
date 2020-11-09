@@ -24,8 +24,6 @@
     <div class="getButtons">
         <button type="submit" onclick="vote(false)">No</button>
     </div>
-    <canvas id="myChart" width="400" height="400"></canvas>
-    <p id="infoHer"></p>
 
 </div>
 
@@ -43,16 +41,18 @@
     poll_name = params.get('name');
     title.innerHTML = poll_name;
 
+    screenwidth = window.screen.width;
+    screenheight = window.screen.height;
+    console.log("screen w and h: " + screenwidth + " " + screenheight);
 
     getVotes(poll_id).then(votes => {
         // Chart
         var ctx = document.getElementById('chart').getContext('2d');
-        var myChart = new Chart(ctx, {
+        var chart = new Chart(ctx, {
             type: 'bar',
             data: {
                 labels: ['Yes', 'No'],
                 datasets: [{
-                    label: '# of Votes',
                     data: votes,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
@@ -66,11 +66,22 @@
                 }]
             },
             options: {
+                tooltips: {
+                    bodyFontSize: screenheight / 40
+                },
+                legend: false,
                 responsive: true,
                 scales: {
                     yAxes: [{
                         ticks: {
-                            beginAtZero: true
+                            fontSize: screenheight / 40,
+                            beginAtZero: true,
+                            stepSize: 1
+                        }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            fontSize: screenheight / 40
                         }
                     }]
                 }

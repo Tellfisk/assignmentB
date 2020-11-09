@@ -86,7 +86,7 @@ async function getAllPollsByUser(id) {
         printString += parsePoll(currPoll);
     });
 
-    infoHer.innerHTML = "<h2>ALL POLLS:</h2> <br> <p style='text-align: left; margin-left: 8px;' >"+printString+"</p>";
+    infoHer.innerHTML = "<br> <p style='text-align: left; margin-left: 8px;' >"+printString+"</p>";
 }
 
 /** 
