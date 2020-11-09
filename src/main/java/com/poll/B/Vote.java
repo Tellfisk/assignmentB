@@ -23,9 +23,8 @@ public class Vote {
 
     public Vote(){}
 
-    public Vote(boolean yes/*, Person person*/, Poll poll) {
+    public Vote(boolean yes, Poll poll) {
         this.yes = yes;
-//        this.person = person;
         this.poll = poll;
     }
 
@@ -44,14 +43,6 @@ public class Vote {
     public void setPoll(Poll poll) {
         this.poll = poll;
     }
-
- /*   public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
-    }*/
 
     public boolean isYes() {
         return yes;

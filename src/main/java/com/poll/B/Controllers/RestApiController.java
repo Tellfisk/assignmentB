@@ -199,7 +199,7 @@ public class RestApiController {
         return pollRepository.findById(id)
                 .map(poll -> {
                     poll.setName(newPoll.getName());
-                    //poll.setVotes((newPoll.getVotes()));
+
                     for (Vote vote : newPoll.getVotes())
                         voteRepository.save(vote);
                     return pollRepository.save(poll);
@@ -254,6 +254,7 @@ public class RestApiController {
 //                    vote.setPerson(newVote.getPerson());
                     vote.setPoll(newVote.getPoll());
                     vote.setFkpoll(newVote.getFkpoll());
+                    vote.setFkperson(newVote.getFkperson());
                     return voteRepository.save(vote);
                 })
                 .orElseGet(() -> {

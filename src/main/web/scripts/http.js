@@ -67,8 +67,8 @@ async function getPersonIdByEmail(email) {
 }
 
 async function getAllPolls() {
-    var currUrl = url + "/polls",
-        retVal = await request(currUrl, 'GET', "");
+    var currUrl = url + "/polls";
+    var retVal = await request(currUrl, 'GET', "");
     var myArr = JSON.parse(retVal);
 
     var printString = "";
@@ -80,8 +80,8 @@ async function getAllPolls() {
 }
 
 async function getAllPollsByUser(id) {
-    var currUrl = url + "/polls/person/" + id,
-        retVal = await request(currUrl, 'GET', "");
+    var currUrl = url + "/polls/person/" + id;
+    var retVal = await request(currUrl, 'GET', "");
 
     var myArr = JSON.parse(retVal);
 
@@ -94,8 +94,8 @@ async function getAllPollsByUser(id) {
 }
 
 async function getVotes(id) {
-    var currUrl = url + "/polls/" + id + "/votes",
-        retVal = await request(currUrl, 'GET', "");
+    var currUrl = url + "/polls/" + id + "/votes";
+    var retVal = await request(currUrl, 'GET', "");
     
     var myArr = JSON.parse(retVal);
 
