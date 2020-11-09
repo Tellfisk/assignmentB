@@ -37,45 +37,47 @@
 <script src="scripts/Chart.js"></script>
 
 <script>
-    // Chart
-    var ctx = document.getElementById('chart').getContext('2d');
-    var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: ['Yes', 'No'],
-        datasets: [{
-            label: '# of Votes',
-            data: [4, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        responsive: true,
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
-    }
-});
-
-
     // Getting data from url
     let params = new URLSearchParams(location.search);
     poll_id = params.get('id');
     poll_name = params.get('name');
-    getVotes(poll_id);
     title.innerHTML = poll_name;
+
+
+    getVotes(poll_id).then(votes => {
+        // Chart
+        var ctx = document.getElementById('chart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Yes', 'No'],
+                datasets: [{
+                    label: '# of Votes',
+                    data: votes,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+    });
+
 
     // Voting 
     function vote(yes) {
@@ -93,7 +95,7 @@
                         }
                     })
                 });
-
+                //window.location.reload(false); 
             }
             else {
                 // User is signed out.

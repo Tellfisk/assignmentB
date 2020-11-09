@@ -53,15 +53,11 @@ async function getSinglePoll() {
 }
 
 async function getPersonIdByEmail(email) {
-    // Caught in promise
-    var currUrl = url + "/persons/email/" + email,
-        retVal = await request(currUrl, 'GET', "");
+    var currUrl = url + "/persons/email/" + email;
+    var retVal = await request(currUrl, 'GET', "");
     
     var parsedVal = JSON.parse(retVal);
-    console.log(parsedVal + "yo");
     var person_id = JSON.stringify(parsedVal['id']);
-    console.log(person_id);
-
 
     return person_id;
 }
@@ -80,8 +76,8 @@ async function getAllPolls() {
 }
 
 async function getAllPollsByUser(id) {
-    var currUrl = url + "/polls/person/" + id,
-        retVal = await request(currUrl, 'GET', "");
+    var currUrl = url + "/polls/person/" + id;
+    var retVal = await request(currUrl, 'GET', "");
 
     var myArr = JSON.parse(retVal);
 
@@ -93,7 +89,8 @@ async function getAllPollsByUser(id) {
     infoHer.innerHTML = "<h2>ALL POLLS:</h2> <br> <p style='text-align: left; margin-left: 8px;' >"+printString+"</p>";
 }
 
-async function getVotes(id) {
+/** 
+    async function getVotes(id) {
     var currUrl = url + "/polls/" + id + "/votes",
         retVal = await request(currUrl, 'GET', "");
     
@@ -105,14 +102,23 @@ async function getVotes(id) {
     });
     infoHer.innerHTML = "<h2>ALL VOTES:</h2> <br> <p style='text-align: left; margin-left: 8px;' >"+printString+"</p>";
 }
+**/
+
+async function getVotes(id) {
+    var currUrl = url + "/polls/" + id + "/distribution";
+    var retVal = await request(currUrl, 'GET', "");
+    var votes = JSON.parse(retVal);
+    
+    return [votes['yes'], votes['no']]
+}
 
 async function createPoll(email, person_id) {
     var name = document.getElementById("pname").value;
     var pollJson = '{ \"name\": \"' + name + '\", ' +
                      '\"creator\": \"' + email + '\", ' +
                      '\"fkperson\": \"' + person_id + '\" }';
-    var currUrl = url + "/polls",
-        retVal = await request(currUrl, 'POST', pollJson);
+    var currUrl = url + "/polls";
+    var retVal = await request(currUrl, 'POST', pollJson);
 }
 
 async function createPerson() {
