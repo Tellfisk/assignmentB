@@ -108,7 +108,7 @@ async function getVotes(id) {
     var currUrl = url + "/polls/" + id + "/distribution";
     var retVal = await request(currUrl, 'GET', "");
     var votes = JSON.parse(retVal);
-    
+        
     return [votes['yes'], votes['no']]
 }
 

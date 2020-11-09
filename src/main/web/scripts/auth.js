@@ -17,17 +17,13 @@ const auth = firebase.auth();
 auth.onAuthStateChanged(function (user) {
   if (user) {
     // User is signed in
-
     var user = auth.currentUser;
   
     if (user != null) {
       // Valid user
-
     }
-
   } else {
     // No user is signed in
-
   }
 });
 
@@ -57,7 +53,6 @@ function login() {
     }
     console.log(error);
   });
-  
 }
 
 function logout() {
@@ -66,10 +61,7 @@ function logout() {
   }, function (error) {
     console.error('Sign Out Error', error);
   });
-
-  
 }
-
 
 function signup() {
   // Sign user up
@@ -87,5 +79,4 @@ function signup() {
       console.log(errorCode + " " + errorMessage);
 
     });
-
 }
