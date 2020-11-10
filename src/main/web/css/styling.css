@@ -23,6 +23,12 @@ nav {
   height: auto;
 }
 
+.emailnav {
+  padding-top: 10px;
+  padding-left: 10px;
+  font-size: 20px;
+}
+
 canvas {
   height: 50vh !important;
   width: 60vw !important;
