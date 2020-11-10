@@ -24,8 +24,7 @@
     <div class="getButtons">
         <button type="submit" onclick="vote(false)">No</button>
     </div>
-    <canvas id="myChart" width="400" height="400"></canvas>
-    <p id="infoHer"></p>
+
 
 </div>
 
@@ -47,7 +46,7 @@
     getVotes(poll_id).then(votes => {
         // Chart
         var ctx = document.getElementById('chart').getContext('2d');
-        var myChart = new Chart(ctx, {
+        var chart = new Chart(ctx, {
             type: 'bar',
             data: {
                 labels: ['Yes', 'No'],
