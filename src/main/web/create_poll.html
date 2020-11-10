@@ -24,7 +24,7 @@
 
 
     <h1>Create a poll</h1>
-    Poll name: <br><input type="text" id="pname" name="pollname"><br>
+    Poll name: <br><input type="text" id="pname" name="pollname" maxlength="10"><br>
 
     <div class="outerman">
         <div>
@@ -53,8 +53,7 @@
                         createPoll(email, id);
                         let name = document.getElementById("pname").value;
                         getPollByName(name).then(poll => {
-                            window.location.href = "view_poll.html?id=" + poll['id'] + "&name=" + name;
-                            createdby.innerHTML = "created by " + email;
+                            window.location.href = "view_poll.html?id=" + poll['id'] + "&name=" + name + "&by=" + email;
                         })
 
 

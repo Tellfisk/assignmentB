@@ -89,7 +89,7 @@ async function getAllPolls() {
         printString += parsePoll(currPoll);
     });
 
-    infoHer.innerHTML = "<p style='text-align: left; margin-left: 8px;' >"+printString+"</p>";
+    infoHer.innerHTML = "<div class='grid'>"+printString+"</div>";
 }
 
 async function getAllPollsByUser(id) {
@@ -103,7 +103,7 @@ async function getAllPollsByUser(id) {
         printString += parsePoll(currPoll);
     });
 
-    infoHer.innerHTML = "<br> <p style='text-align: left; margin-left: 8px;' >"+printString+"</p>";
+    infoHer.innerHTML = "<div class='grid'>"+printString+"</div>";
 }
 
 /** 
@@ -163,11 +163,11 @@ async function hasVoted(poll_id, person_id) {
 
 function parsePoll(poll) {
     let printString = "";
-    printString += "" + poll['name']+ "<br>";
+    printString += "<div class='item'><a>" + poll['name']+ "</a><br>";
     printString += "Votes: " + poll['votes'].length + "<br>";
 
     let redirect_url = "\"view_poll.html?id=" +  poll['id'] + "&name=" + poll['name'] + "&by=" + poll['creator'];
-    printString += "<a class='colored' href=" + redirect_url + " \">Vote</a><br><br>"
+    printString += "<a class='colored' href=" + redirect_url + " \">Vote</a></div>"
     return printString;
 }
 
