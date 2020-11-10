@@ -8,10 +8,15 @@
     <meta charset="UTF-8">
 
     <nav>
-        <button onclick="logout()">Logout</button>
-        <button onclick="location.href='dashboard.html'">Dashboard</button>
-        <button onclick="location.href='find_poll.html'">Find poll</button>
-        <button onclick="location.href='create_poll.html'">Create poll</button>
+        <div>
+            <p id="emailnav"></p>
+        </div>
+        <div>
+            <button onclick="logout()">Logout</button>
+            <button onclick="location.href='dashboard.html'">Dashboard</button>
+            <button onclick="location.href='find_poll.html'">Find poll</button>
+            <button onclick="location.href='create_poll.html'">Create poll</button>
+        </div>
     </nav>
 </head>
 <div class="container">
@@ -47,6 +52,7 @@
 
     getVotes(poll_id).then(votes => {
         // Chart
+        console.log(votes, votes[0], votes[1]);
         var ctx = document.getElementById('chart').getContext('2d');
         var chart = new Chart(ctx, {
             type: 'bar',

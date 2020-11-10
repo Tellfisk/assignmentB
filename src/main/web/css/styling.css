@@ -8,11 +8,22 @@ body{
     
 }
 
-nav {
-  display: flex; 
-  justify-content: space-around;
-  float: right;
+head {
+   margin:0px;
+   margin-top:60px;
+   padding: 0px;
 }
+
+nav{
+  display: flex;
+  top:0;
+  width: 100%;
+  justify-content: space-between;
+  
+  overflow: auto;
+  height: auto;
+}
+
 
 .chart {
   width: 70% !important;

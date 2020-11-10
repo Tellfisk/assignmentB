@@ -52,27 +52,21 @@ async function getPollById() {
     infoHer.innerHTML = "<h2>POLL WITH ID " + id + ":</h2><br>" + printval;
 }
 
-async function getPollByName() {
-    let name = document.getElementById("pollNameInp").value; // CHANGE
+async function getPollByName(name) {
     console.log("name " + name);
-    if(name===""){
-        infoHer.innerHTML = "<h2>ERROR:</h2> <br> Please input name";
-        return;
-    }
 
     let currUrl = url + "/polls/name/" + name;
     console.log("url " + currUrl);
     let retVal = await request(currUrl, 'GET', "");
-
+    printval = ""
 
     if (retVal === ""){
-        printval = "No poll with this name.";
+        return "No poll with this name.";
     }
     else{
-        let parsedVal = JSON.parse(retVal);
-        printval = parsePoll(parsedVal)
+        let printval = JSON.parse(retVal);
+        return printval;
     }
-    infoHer.innerHTML = "<h2>POLL WITH NAME " + name + ":</h2><br>" + printval;
 }
 
 async function getPersonIdByEmail(email) {

@@ -17,19 +17,17 @@ const auth = firebase.auth();
 auth.onAuthStateChanged(function (user) {
   if (user) {
     // User is signed in
-    var user = auth.currentUser;
+    emailnav.innerHTML = user.email;
+
+    
   
     if (user != null) {
-      // Valid user
+      
     }
   } else {
     // No user is signed in
   }
 });
-
-function setmail(mail) {
-  email = mail;
-}
 
 function login() {
 

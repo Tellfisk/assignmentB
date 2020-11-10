@@ -8,10 +8,15 @@
     <meta charset="UTF-8">
 
     <nav>
-        <button onclick="logout()">Logout</button>
-        <button onclick="location.href='dashboard.html'">Dashboard</button>
-        <button onclick="location.href='find_poll.html'">Find poll</button>
-        <button onclick="location.href='create_poll.html'">Create poll</button>
+        <div>
+            <p id="emailnav"></p>
+        </div>
+        <div>
+            <button onclick="logout()">Logout</button>
+            <button onclick="location.href='dashboard.html'">Dashboard</button>
+            <button onclick="location.href='find_poll.html'">Find poll</button>
+            <button onclick="location.href='create_poll.html'">Create poll</button>
+        </div>
     </nav>
 </head>
 
@@ -24,7 +29,7 @@
 
         <div class="outerman">
             <div>
-                <button onclick="go();">Create poll</button>
+                <button onclick="create();">Create poll</button>
             </div>
         </div>
     </div>
@@ -38,7 +43,7 @@
     <script>
 
 
-        function go() {
+        function create() {
             auth.onAuthStateChanged(user => {
                 if (user) {
                     // User is signed in.
@@ -47,6 +52,13 @@
                     getPersonIdByEmail(email).then(id => {
                         console.log("id " + id + ", email " + email);
                         createPoll(email, id);
+                        let name = document.getElementById("pname").value;
+                        getPollByName(name).then(poll => {
+                            window.location.href = "view_poll.html?id=" + poll['id'] + "&name=" + name;
+                        })
+                        
+                        
+
                     });
 
                 }
