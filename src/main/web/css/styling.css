@@ -14,20 +14,21 @@ head {
    padding: 0px;
 }
 
-nav{
+nav {
   display: flex;
   top:0;
+  margin: 0;
   width: 100%;
   justify-content: space-between;
-  
   overflow: auto;
   height: auto;
 }
 
-
-.chart {
-  width: 70% !important;
-  height: 70% !important;
+canvas {
+ 
+  height: 50vh !important;
+  width: 60vw !important;
+  padding-left: 18vw !important;
   
 }
 
@@ -110,6 +111,16 @@ input:-webkit-autofill:active  {
     -webkit-box-shadow: black inset !important;
     transition: background-color 5000s ease-in-out 0s;
     -webkit-text-fill-color: white;
+}
+
+.login-screen {
+  background-size: auto auto !important;
+  background-image: url('../assets/login-back.jpg');
+  background-size: cover !important; 
+  background-position: center center;
+  background-repeat: no-repeat;
+  margin: auto;
+  
 }
 
 .login-box {

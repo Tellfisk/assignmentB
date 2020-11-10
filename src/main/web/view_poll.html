@@ -21,16 +21,15 @@
 </head>
 <div class="container">
     <h1 id="title"></h1>
-    <canvas id="chart" class="chart"></canvas>
-
-    <div class="getButtons">
-        <button type="submit" onclick="vote(true)">Yes</button>
-    </div>
-    <div class="getButtons">
-        <button type="submit" onclick="vote(false)">No</button>
-    </div>
-
 </div>
+<canvas id="chart" class="chart"></canvas>
+
+<div class="getButtons">
+    <button type="submit" onclick="vote(true)">Yes</button>
+    <button type="submit" onclick="vote(false)">No</button>
+</div>
+
+
 
 <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>
@@ -72,11 +71,15 @@
                 }]
             },
             options: {
+                layout: {
+                    left: 1000
+                },
                 tooltips: {
                     bodyFontSize: screenheight / 40
                 },
                 legend: false,
                 responsive: true,
+                maintainAspectRatio: false,
                 scales: {
                     yAxes: [{
                         ticks: {
@@ -109,12 +112,12 @@
                         if (!voted) {
                             console.log("id_poll " + poll_id + " id_person " + person_id + ", email " + email);
                             createVote(yes, poll_id, person_id);
-                            window.location.reload(false); 
+                            window.location.reload(false);
                         }
                     })
                 });
-                
-                
+
+
             }
             else {
                 // User is signed out.
