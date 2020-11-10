@@ -22,24 +22,26 @@
 
 <body>
 
-    <div class="container">
-        <h1>Find a poll</h1>
 
-        <div class="outerman">
-            <div class="getButtons">
-                <button type="submit" onclick="getAllPolls()">Get all polls</button>
-            </div>
+    <h1>Find a poll</h1>
 
-            <div class="getButtons">
-                <button type="submit" onclick="getPollByName()">Get single poll</button>
-            </div>
-            <p> Input name:
-                <input type="text" id="pollNameInp">
-            </p>
+    <div class="outerman">
+        <div class="getButtons">
+            <button type="submit" onclick="getAllPolls()">Get all polls</button>
         </div>
 
-        <div><p id="infoHer"></p></div>
+        <div class="getButtons">
+            <button type="submit" onclick="getPollByName()">Get single poll</button>
+        </div>
+        <p> Input name:
+            <input type="text" id="pollNameInp">
+        </p>
     </div>
+
+    <div>
+        <p id="infoHer"></p>
+    </div>
+
 
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-auth.js"></script>

@@ -22,17 +22,16 @@
 
 <body>
 
-    <div class="container">
-        <h1>Create a poll</h1>
 
-        Poll name: <br><input type="text" id="pname" name="pollname"><br>
+    <h1>Create a poll</h1>
+    Poll name: <br><input type="text" id="pname" name="pollname"><br>
 
-        <div class="outerman">
-            <div>
-                <button onclick="create();">Create poll</button>
-            </div>
+    <div class="outerman">
+        <div>
+            <button onclick="create();">Create poll</button>
         </div>
     </div>
+
 
 
     <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
@@ -55,9 +54,10 @@
                         let name = document.getElementById("pname").value;
                         getPollByName(name).then(poll => {
                             window.location.href = "view_poll.html?id=" + poll['id'] + "&name=" + name;
+                            createdby.innerHTML = "created by " + email;
                         })
-                        
-                        
+
+
 
                     });
 
@@ -71,4 +71,5 @@
 
 
 </body>
+
 </html>

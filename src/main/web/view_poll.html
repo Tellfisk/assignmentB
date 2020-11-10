@@ -19,11 +19,10 @@
         </div>
     </nav>
 </head>
-<div class="container">
-    <h1 id="title"></h1>
-</div>
-<canvas id="chart" class="chart"></canvas>
 
+<h1 id="title"></h1>
+<canvas id="chart" class="chart"></canvas>
+<p id=createdby class="colored"></p>
 <div class="getButtons">
     <button type="submit" onclick="vote(true)">Yes</button>
     <button type="submit" onclick="vote(false)">No</button>
@@ -43,7 +42,9 @@
     let params = new URLSearchParams(location.search);
     poll_id = params.get('id');
     poll_name = params.get('name');
+    poll_by = params.get('by');
     title.innerHTML = poll_name;
+    createdby.innerHTML = "created by " + poll_by;
 
     screenwidth = window.screen.width;
     screenheight = window.screen.height;

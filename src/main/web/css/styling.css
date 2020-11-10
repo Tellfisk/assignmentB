@@ -32,8 +32,9 @@ canvas {
   
 }
 
-.container {
-  padding-top: 100px;
+.colored {
+  font-size: 15px;
+  color: #408e92;
 }
 
 li {
@@ -43,7 +44,8 @@ li {
     padding: 10;
   }
 
-h1{
+h1 {
+    color: #3e9196;
     font-size: 52px;
     text-align: center;
     margin: 40px 0 60px 0;
