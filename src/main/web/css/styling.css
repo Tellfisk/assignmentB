@@ -25,11 +25,20 @@ nav {
 }
 
 canvas {
- 
   height: 50vh !important;
   width: 60vw !important;
   padding-left: 18vw !important;
   
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 195px 195px 195px 195px 195px;
+}
+
+.item {
+  margin: 20px;
+  margin-bottom: 20px;
 }
 
 .colored {
@@ -86,7 +95,7 @@ input[type=number]{
 #infoHer{
     float: bottom;
     min-height: 300px;
-    width: 70vw;
+    width: 69.5vw;
     margin: 0 auto;
     margin-top: 50px;
     border: cadetblue 2px solid;
@@ -100,8 +109,9 @@ input[type=number]{
 }
 
 a {
-  color: #03e9f4;
+  color: cadetblue;
   text-align: center;
+  font-size: 20px;
 }
 
 /* Styling login page */
