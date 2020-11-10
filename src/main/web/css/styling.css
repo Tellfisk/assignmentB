@@ -86,6 +86,7 @@ input[type=number]{
 #infoHer{
     float: bottom;
     min-height: 300px;
+    width: 70vw;
     margin: 0 auto;
     margin-top: 50px;
     border: cadetblue 2px solid;
@@ -100,6 +101,7 @@ input[type=number]{
 
 a {
   color: #03e9f4;
+  text-align: center;
 }
 
 /* Styling login page */
