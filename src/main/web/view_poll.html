@@ -101,21 +101,23 @@
 
 
     // Voting 
-    function vote(yes) {
+    async function vote(yes) {
         auth.onAuthStateChanged(user => {
             if (user) {
                 // User is signed in.
                 let email = user.email;
-                console.log(email);
+                console.log("user email:" + email);
                 getPersonIdByEmail(email).then(person_id => {
                     hasVoted(poll_id, person_id).then(voted => {
-                        console.log(voted)
+                        console.log("has voted: " + voted);
                         if (!voted) {
                             console.log("id_poll " + poll_id + " id_person " + person_id + ", email " + email);
-                            createVote(yes, poll_id, person_id);
-                            window.location.reload(false);
+                            createVote(yes, poll_id, person_id).then(retVal => {
+                                console.log(retVal);
+                                window.location.reload(false);
+                            });
                         }
-                    })
+                    });
                 });
 
 
