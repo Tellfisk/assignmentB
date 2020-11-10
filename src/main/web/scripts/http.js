@@ -1,5 +1,4 @@
-var url = "http://84.215.98.118:8080",
-    infoHer = document.getElementById("infoHer");
+
 
 
 // Generic HTTP Request //
