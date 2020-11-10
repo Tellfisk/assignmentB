@@ -151,6 +151,7 @@ async function createVote(yes, poll_id, person_id) {
                      '\"fkperson\": \"' + person_id + '\" }';
     let currUrl = url + "/votes";
     let retVal = await request(currUrl, 'POST', pollJson);
+    return retVal;
 }
 
 async function hasVoted(poll_id, person_id) {
