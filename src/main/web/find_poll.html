@@ -24,20 +24,22 @@
 
 
     <h1>Find a poll</h1>
-
+    <div>
+        <form action="" class="search-bar">
+            <input type="search" name="search" id="pollNameInp" pattern=".*\S.*" required>
+            <button  type="submit" onclick="singlePoll()">
+                <span>Search</span>
+            </button>
+        </form>
+    </div>
     <div class="outerman">
         <div class="getButtons">
             <button type="submit" onclick="getAllPolls()">Get all polls</button>
         </div>
 
-        <div class="getButtons">
-            <button type="submit" onclick="singlePoll()">Get single poll</button>
-        </div>
-        <p> Input name:
-            <input type="text" id="pollNameInp">
-        </p>
-    </div>
 
+    </div>
+    
     <div>
         <p id="infoHer"></p>
     </div>
@@ -51,7 +53,7 @@
     <script>
         function singlePoll() {
             let name = document.getElementById("pollNameInp").value;
-            getPollByName(name).then( printval => {
+            getPollByName(name).then(printval => {
                 infoHer.innerHTML = "<h2>POLL WITH NAME " + name + ":</h2><br>" + parsePoll(printval);
             });
 
