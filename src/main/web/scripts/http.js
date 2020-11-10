@@ -45,7 +45,7 @@ async function getPollById() {
     if (retVal === ""){
         printval = "No poll with this id.";
     }
-    else{
+    else {
         let parsedVal = JSON.parse(retVal);
         printval = parsePoll(parsedVal)
     }
@@ -64,8 +64,7 @@ async function getPollByName(name) {
         return "No poll with this name.";
     }
     else{
-        let printval = JSON.parse(retVal);
-        return printval;
+        return JSON.parse(retVal);
     }
 }
 
