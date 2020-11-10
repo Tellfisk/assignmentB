@@ -22,23 +22,23 @@ let request = async (nowUrl, method, body) => {
             }
         });
     }
-    const myJson = await response.text(); //extract JSON from the http response
-    return myJson;
+     //extract JSON from the http response
+    return await response.text();
 }
 
 
 // Unique REST API calls //
 
-async function getSinglePoll() {
-    var id = document.getElementById("pollIdInp").value; // CHANGE
+async function getPollById() {
+    let id = document.getElementById("pollIdInp").value; // CHANGE
 
     if(id===""){
         infoHer.innerHTML = "<h2>ERROR:</h2> <br> Please input ID";
         return;
     }
 
-    var currUrl = url + "/polls/" + id;
-    var retVal = await request(currUrl, 'GET', "");
+    let currUrl = url + "/polls/" + id;
+    let retVal = await request(currUrl, 'GET', "");
 
     // if(!Object.keys(retVal).length){
 
@@ -46,28 +46,51 @@ async function getSinglePoll() {
         printval = "No poll with this id.";
     }
     else{
-        var parsedVal = JSON.parse(retVal);
+        let parsedVal = JSON.parse(retVal);
         printval = parsePoll(parsedVal)
     }
     infoHer.innerHTML = "<h2>POLL WITH ID " + id + ":</h2><br>" + printval;
 }
 
+async function getPollByName() {
+    let name = document.getElementById("pollNameInp").value; // CHANGE
+    console.log("name " + name);
+    if(name===""){
+        infoHer.innerHTML = "<h2>ERROR:</h2> <br> Please input name";
+        return;
+    }
+
+    let currUrl = url + "/polls/name/" + name;
+    console.log("url " + currUrl);
+    let retVal = await request(currUrl, 'GET', "");
+
+
+    if (retVal === ""){
+        printval = "No poll with this name.";
+    }
+    else{
+        let parsedVal = JSON.parse(retVal);
+        printval = parsePoll(parsedVal)
+    }
+    infoHer.innerHTML = "<h2>POLL WITH NAME " + name + ":</h2><br>" + printval;
+}
+
 async function getPersonIdByEmail(email) {
-    var currUrl = url + "/persons/email/" + email;
-    var retVal = await request(currUrl, 'GET', "");
+    let currUrl = url + "/persons/email/" + email;
+    let retVal = await request(currUrl, 'GET', "");
     
-    var parsedVal = JSON.parse(retVal);
-    var person_id = JSON.stringify(parsedVal['id']);
+    let parsedVal = JSON.parse(retVal);
+    let person_id = JSON.stringify(parsedVal['id']);
 
     return person_id;
 }
 
 async function getAllPolls() {
-    var currUrl = url + "/polls",
+    let currUrl = url + "/polls",
         retVal = await request(currUrl, 'GET', "");
-    var myArr = JSON.parse(retVal);
+    let myArr = JSON.parse(retVal);
 
-    var printString = "";
+    let printString = "";
     myArr.forEach(currPoll => {
         printString += parsePoll(currPoll);
     });
@@ -76,27 +99,27 @@ async function getAllPolls() {
 }
 
 async function getAllPollsByUser(id) {
-    var currUrl = url + "/polls/person/" + id;
-    var retVal = await request(currUrl, 'GET', "");
+    let currUrl = url + "/polls/person/" + id;
+    let retVal = await request(currUrl, 'GET', "");
 
-    var myArr = JSON.parse(retVal);
+    let myArr = JSON.parse(retVal);
 
-    var printString = "";
+    let printString = "";
     myArr.forEach(currPoll => {
         printString += parsePoll(currPoll);
     });
 
-    infoHer.innerHTML = "<h2>ALL POLLS:</h2> <br> <p style='text-align: left; margin-left: 8px;' >"+printString+"</p>";
+    infoHer.innerHTML = "<br> <p style='text-align: left; margin-left: 8px;' >"+printString+"</p>";
 }
 
 /** 
     async function getVotes(id) {
-    var currUrl = url + "/polls/" + id + "/votes",
+    let currUrl = url + "/polls/" + id + "/votes",
         retVal = await request(currUrl, 'GET', "");
     
-    var myArr = JSON.parse(retVal);
+    let myArr = JSON.parse(retVal);
 
-    var printString = "";
+    let printString = "";
     myArr.forEach(currVote => {
         printString += parseVotes(currVote);
     });
@@ -105,57 +128,57 @@ async function getAllPollsByUser(id) {
 **/
 
 async function getVotes(id) {
-    var currUrl = url + "/polls/" + id + "/distribution";
-    var retVal = await request(currUrl, 'GET', "");
-    var votes = JSON.parse(retVal);
+    let currUrl = url + "/polls/" + id + "/distribution";
+    let retVal = await request(currUrl, 'GET', "");
+    let votes = JSON.parse(retVal);
         
     return [votes['yes'], votes['no']]
 }
 
 async function createPoll(email, person_id) {
-    var name = document.getElementById("pname").value;
-    var pollJson = '{ \"name\": \"' + name + '\", ' +
+    let name = document.getElementById("pname").value;
+    let pollJson = '{ \"name\": \"' + name + '\", ' +
                      '\"creator\": \"' + email + '\", ' +
                      '\"fkperson\": \"' + person_id + '\" }';
-    var currUrl = url + "/polls";
-    var retVal = await request(currUrl, 'POST', pollJson);
+    let currUrl = url + "/polls";
+    let retVal = await request(currUrl, 'POST', pollJson);
 }
 
 async function createPerson() {
-    var email = document.getElementById("email_reg").value;
+    let email = document.getElementById("email_reg").value;
     email = email.toLowerCase();
-    var pollJson = '{ \"email\": \"' + email + '\" }';
-    var currUrl = url + "/persons";
-    var retval = await request(currUrl, 'POST', pollJson);
+    let pollJson = '{ \"email\": \"' + email + '\" }';
+    let currUrl = url + "/persons";
+    let retval = await request(currUrl, 'POST', pollJson);
 }
 
 async function createVote(yes, poll_id, person_id) {
-    var pollJson = '{ \"yes\": \"' + yes + '\", ' +
+    let pollJson = '{ \"yes\": \"' + yes + '\", ' +
                      '\"fkpoll\": \"' + poll_id + '\", ' +
                      '\"fkperson\": \"' + person_id + '\" }';
-    var currUrl = url + "/votes";
-    var retVal = await request(currUrl, 'POST', pollJson);
+    let currUrl = url + "/votes";
+    let retVal = await request(currUrl, 'POST', pollJson);
 }
 
 async function hasVoted(poll_id, person_id) {
-    var currUrl = url + '/polls/' + poll_id + '/hasVoted/' + person_id;
-    var retVal = await request(currUrl, 'GET', "");
-    var bool = JSON.parse(retVal);
+    let currUrl = url + '/polls/' + poll_id + '/hasVoted/' + person_id;
+    let retVal = await request(currUrl, 'GET', "");
+    let bool = JSON.parse(retVal);
     return bool['hasVoted'];
 }
 
 function parsePoll(poll) {
-    var printString = "";
+    let printString = "";
     printString += "Name: " + JSON.stringify(poll['name']);
     printString += "<br>Votes: " + poll['votes'].length + "<br>";
 
-    url = "\"view_poll.html?id=" +  poll['id'] + "&name=" + poll['name'];
-    printString += "<a href=" + url + " \">Vote</a><br><br>"
+    let redirect_url = "\"view_poll.html?id=" +  poll['id'] + "&name=" + poll['name'];
+    printString += "<a href=" + redirect_url + " \">Vote</a><br><br>"
     return printString;
 }
 
 function parseVotes(vote){
-    var printString = "";
+    let printString = "";
     printString += "<a>" + vote['yes'] + "</a><br><br>"
     console.log(vote['yes']);
     return printString;

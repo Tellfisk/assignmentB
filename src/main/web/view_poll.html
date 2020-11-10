@@ -25,7 +25,6 @@
         <button type="submit" onclick="vote(false)">No</button>
     </div>
 
-
 </div>
 
 <script src="https://www.gstatic.com/firebasejs/8.0.1/firebase-app.js"></script>
@@ -42,6 +41,9 @@
     poll_name = params.get('name');
     title.innerHTML = poll_name;
 
+    screenwidth = window.screen.width;
+    screenheight = window.screen.height;
+    console.log("screen w and h: " + screenwidth + " " + screenheight);
 
     getVotes(poll_id).then(votes => {
         // Chart
@@ -51,7 +53,6 @@
             data: {
                 labels: ['Yes', 'No'],
                 datasets: [{
-                    label: '# of Votes',
                     data: votes,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
@@ -65,11 +66,22 @@
                 }]
             },
             options: {
+                tooltips: {
+                    bodyFontSize: screenheight / 40
+                },
+                legend: false,
                 responsive: true,
                 scales: {
                     yAxes: [{
                         ticks: {
-                            beginAtZero: true
+                            fontSize: screenheight / 40,
+                            beginAtZero: true,
+                            stepSize: 1
+                        }
+                    }],
+                    xAxes: [{
+                        ticks: {
+                            fontSize: screenheight / 40
                         }
                     }]
                 }
