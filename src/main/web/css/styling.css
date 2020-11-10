@@ -249,51 +249,6 @@ input:-webkit-autofill:active  {
 
   /* Search bar styling **/
 
-  
-  
-  /* Active state */
-  .search-bar input:focus + .search-btn,
-  .search-bar input:valid + .search-btn {
-    background: cadetblue;
-    border-radius: 0 0.375em 0.375em 0;
-    transform: scale(1);
-  }
-  .search-bar input:focus + .search-btn:before, 
-  .search-bar input:focus + .search-btn:after,
-  .search-bar input:valid + .search-btn:before, 
-  .search-bar input:valid + .search-btn:after {
-    opacity: 1;
-  }
-  .search-bar input:focus + .search-btn:hover,
-  .search-bar input:valid + .search-btn:hover,
-  .search-bar input:valid:not(:focus) + .search-btn:focus {
-    background: cadetblue;
-  }
-  .search-bar input:focus + .search-btn:active,
-  .search-bar input:valid + .search-btn:active {
-    transform: translateY(1px);
-  }
-  
-  @media screen and (prefers-color-scheme: dark) {
-    body, input {
-      color: #f1f1f1;
-    }
-    body {
-      background: #171717;
-    }
-    .search-bar input {
-      box-shadow: 0 0 0 0.4em #f1f1f1 inset;
-    }
-    .search-bar input:focus,
-    .search-bar input:valid {
-      background: #3d3d3d;
-      box-shadow: 0 0 0 0.1em #3d3d3d inset;
-    }
-    .search-btn {
-      background: #f1f1f1;
-    }
-  }
-
 #fade body {
     animation: fadein 2s;
     -moz-animation: fadein 2s; /* Firefox */
