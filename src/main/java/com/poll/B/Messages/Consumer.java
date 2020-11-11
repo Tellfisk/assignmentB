@@ -9,18 +9,16 @@ public class Consumer {
     public static void main(String [] args) throws IOException, TimeoutException {
         ConnectionFactory factory = new ConnectionFactory();
 
-        try (Connection connection = factory.newConnection()) {
-            Channel channel = connection.createChannel();
-            channel.queueDeclare("queue-name", false, false, false, null);
+        Connection connection = factory.newConnection();
+        Channel channel = connection.createChannel();
+        channel.queueDeclare("queue-name", false, false, false, null);
 
-            channel.basicConsume("queue-name", true, new DeliverCallback() {
-                @Override
-                public void handle(String s, Delivery message) throws IOException {
-                    String m = new String(message.getBody(), "UTF-8");
-                    System.out.println("Recieved message: " + m);
-                }
-            }, consumerTag -> {});
-        }
+        channel.basicConsume("queue-name", true, (consumerTag, message) -> {
+                String m = new String(message.getBody(), "UTF-8");
+                System.out.println("Recieved message: " + m);
+
+        }, consumerTag -> {});
+
     }
 
 }
