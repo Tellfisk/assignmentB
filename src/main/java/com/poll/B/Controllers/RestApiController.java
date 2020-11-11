@@ -27,7 +27,6 @@ public class RestApiController {
     @PostMapping("/persons")
     public Person savePerson(@RequestBody Person person) {
         personRepository.save(person);
-        Producer producer = new Producer(person);
         return person;
     }
 
@@ -66,12 +65,10 @@ public class RestApiController {
         return personRepository.findById(id)
                 .map(person -> {
                     person.setEmail(newPerson.getEmail());
-                    Producer producer = new Producer(person);
                     return personRepository.save(person);
                 })
                 .orElseGet(() -> {
                     newPerson.setId(id);
-                    Producer producer = new Producer(newPerson);
                     return personRepository.save(newPerson);
                 });
     }
@@ -217,7 +214,8 @@ public class RestApiController {
     @PostMapping("/votes")
     public Vote saveVote(@RequestBody Vote vote) {
         voteRepository.save(vote);
-        Producer producer = new Producer(vote);
+        Poll poll = pollRepository.findById(vote.getFkpoll());
+        new Producer(poll);
         return vote;
     }
 
@@ -260,12 +258,14 @@ public class RestApiController {
                     vote.setPoll(newVote.getPoll());
                     vote.setFkpoll(newVote.getFkpoll());
                     vote.setFkperson(newVote.getFkperson());
-                    Producer producer = new Producer(vote);
+                    Poll poll = pollRepository.findById(vote.getFkpoll());
+                    new Producer(poll);
                     return voteRepository.save(vote);
                 })
                 .orElseGet(() -> {
                     newVote.setId(id);
-                    Producer producer = new Producer(newVote);
+                    Poll poll = pollRepository.findById(newVote.getFkpoll());
+                    new Producer(poll);
                     return voteRepository.save(newVote);
                 });
     }
