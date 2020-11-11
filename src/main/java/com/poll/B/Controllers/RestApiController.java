@@ -1,7 +1,5 @@
 package com.poll.B.Controllers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.poll.B.*;
 import com.poll.B.Exceptions.PersonNotFoundException;
 import com.poll.B.Messages.Producer;
@@ -14,9 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.function.Supplier;
 
 @RestController
 public class RestApiController {
@@ -31,6 +27,7 @@ public class RestApiController {
     @PostMapping("/persons")
     public Person savePerson(@RequestBody Person person) {
         personRepository.save(person);
+        Producer producer = new Producer(person);
         return person;
     }
 
@@ -47,9 +44,7 @@ public class RestApiController {
 
     @GetMapping("/persons/email/{email}")
     public Person findPersonByEmail(@PathVariable String email) {
-        Person person = personRepository.findByEmail(email);
-        Producer producer = new Producer(person);
-        return person;
+        return personRepository.findByEmail(email);
     }
 
     @GetMapping("/persons/{id}/votes")
@@ -71,10 +66,12 @@ public class RestApiController {
         return personRepository.findById(id)
                 .map(person -> {
                     person.setEmail(newPerson.getEmail());
+                    Producer producer = new Producer(person);
                     return personRepository.save(person);
                 })
                 .orElseGet(() -> {
                     newPerson.setId(id);
+                    Producer producer = new Producer(newPerson);
                     return personRepository.save(newPerson);
                 });
     }
@@ -217,6 +214,7 @@ public class RestApiController {
     @PostMapping("/votes")
     public Vote saveVote(@RequestBody Vote vote) {
         voteRepository.save(vote);
+        Producer producer = new Producer(vote);
         return vote;
     }
 
@@ -259,10 +257,12 @@ public class RestApiController {
                     vote.setPoll(newVote.getPoll());
                     vote.setFkpoll(newVote.getFkpoll());
                     vote.setFkperson(newVote.getFkperson());
+                    Producer producer = new Producer(vote);
                     return voteRepository.save(vote);
                 })
                 .orElseGet(() -> {
                     newVote.setId(id);
+                    Producer producer = new Producer(newVote);
                     return voteRepository.save(newVote);
                 });
     }
