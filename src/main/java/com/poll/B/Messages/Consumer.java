@@ -1,5 +1,7 @@
 package com.poll.B.Messages;
 
+import com.rabbitmq.client.*;
+
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
@@ -9,12 +11,15 @@ public class Consumer {
 
         try (Connection connection = factory.newConnection()) {
             Channel channel = connection.createChannel();
-            channel.queDeclare("queue-name", false, false, false, null);
+            channel.queueDeclare("queue-name", false, false, false, null);
 
-            String message = "message";
-
-            channel.basicPublish("", "queue-name", false, null, message.getBytes());
-            System.out.println("Message sent");
+            channel.basicConsume("queue-name", true, new DeliverCallback() {
+                @Override
+                public void handle(String s, Delivery message) throws IOException {
+                    String m = new String(message.getBody(), "UTF-8");
+                    System.out.println("Recieved message: " + m);
+                }
+            }, consumerTag -> {});
         }
     }
 
