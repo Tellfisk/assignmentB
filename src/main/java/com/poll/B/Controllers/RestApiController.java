@@ -48,13 +48,7 @@ public class RestApiController {
     @GetMapping("/persons/email/{email}")
     public Person findPersonByEmail(@PathVariable String email) {
         Person person = personRepository.findByEmail(email);
-        ObjectMapper mapper = new ObjectMapper();
-        try {
-            String json = mapper.writeValueAsString(person);
-            Producer producer = new Producer(json);
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+
         return personRepository.findByEmail(email);
     }
 
