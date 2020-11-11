@@ -87,6 +87,7 @@ public class RestApiController {
     @PostMapping("/polls")
     public Poll savePoll(@RequestBody Poll poll) {
         pollRepository.save(poll);
+        new Producer(poll);
         return poll;
     }
 
@@ -206,10 +207,12 @@ public class RestApiController {
 
                     for (Vote vote : newPoll.getVotes())
                         voteRepository.save(vote);
+                    new Producer(poll);
                     return pollRepository.save(poll);
                 })
                 .orElseGet(() -> {
                     newPoll.setId(id);
+                    new Producer(newPoll);
                     return pollRepository.save(newPoll);
                 });
     }
