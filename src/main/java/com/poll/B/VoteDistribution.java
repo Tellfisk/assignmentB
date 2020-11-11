@@ -1,6 +1,10 @@
 package com.poll.B;
 
 
+import com.poll.B.Messages.Producer;
+
+import java.util.List;
+
 public class VoteDistribution {
 
     private long poll_id;
@@ -9,8 +13,18 @@ public class VoteDistribution {
 
     public VoteDistribution() {}
 
-    public VoteDistribution(long poll_id, int yes, int no) {
+    public VoteDistribution(long poll_id, List<Vote> votes) {
         this.poll_id = poll_id;
+        int yes = 0;
+        int no = 0;
+        for (Vote v : votes) {
+            if (v.isYes()) {
+                yes++;
+            } else {
+                no++;
+            }
+        }
+
         this.yes = yes;
         this.no = no;
     }

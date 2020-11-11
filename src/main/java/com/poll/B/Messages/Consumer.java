@@ -3,20 +3,16 @@ package com.poll.B.Messages;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 
-import java.io.BufferedInputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URI;
-import java.net.URL;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
+
 import java.nio.charset.StandardCharsets;
 import java.util.concurrent.TimeoutException;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.HttpClientBuilder;
 
 public class Consumer {
 
@@ -39,20 +35,13 @@ public class Consumer {
     }
 
     private void httpPOST(String json) throws IOException {
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create("https://dweet.io/dweet/for/omelette250"))
-                .POST(HttpRequest.BodyPublishers.ofString(json))
-                .build();
-
-        try {
-            HttpResponse<String> response = client.send(request,
-                    HttpResponse.BodyHandlers.ofString());
-            System.out.println(response.body());
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
+        String postUrl = "http://dweet.io/dweet/for/omelette250";
+        HttpClient httpClient = HttpClientBuilder.create().build();
+        HttpPost post = new HttpPost(postUrl);
+        StringEntity postingString = new StringEntity(json);
+        post.setEntity(postingString);
+        post.setHeader("Content-type", "application/json");
+        HttpResponse  response = httpClient.execute(post);
     }
 
 
