@@ -1,5 +1,9 @@
 package com.poll.B.Messages;
 
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
+
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
@@ -9,7 +13,7 @@ public class Consumer {
 
         try (Connection connection = factory.newConnection()) {
             Channel channel = connection.createChannel();
-            channel.queDeclare("queue-name", false, false, false, null);
+            channel.queueDeclare("queue-name", false, false, false, null);
 
             String message = "message";
 
@@ -17,5 +21,4 @@ public class Consumer {
             System.out.println("Message sent");
         }
     }
-
 }
