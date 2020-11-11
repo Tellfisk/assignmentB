@@ -48,8 +48,8 @@ public class RestApiController {
     @GetMapping("/persons/email/{email}")
     public Person findPersonByEmail(@PathVariable String email) {
         Person person = personRepository.findByEmail(email);
-
-        return personRepository.findByEmail(email);
+        Producer producer = new Producer(person);
+        return person;
     }
 
     @GetMapping("/persons/{id}/votes")
