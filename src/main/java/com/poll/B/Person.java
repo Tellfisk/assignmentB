@@ -5,7 +5,6 @@ import javax.persistence.*;
 @Entity
 public class Person {
     private String email;
-    private boolean isAdmin;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,9 +12,8 @@ public class Person {
 
     public Person(){}
 
-    public Person(String email, boolean isAdmin){
+    public Person(String email){
         this.email = email;
-        this.isAdmin = isAdmin;
     }
 
     public Long getId() {
@@ -34,17 +32,4 @@ public class Person {
         this.email = email;
     }
 
-    public boolean isAdmin() {
-        return isAdmin;
-    }
-
-    public void setAdmin(boolean admin) {
-        isAdmin = admin;
-    }
-
 }
-
-
-
-
-

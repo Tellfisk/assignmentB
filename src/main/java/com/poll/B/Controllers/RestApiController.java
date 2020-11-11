@@ -1,7 +1,10 @@
 package com.poll.B.Controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.poll.B.*;
 import com.poll.B.Exceptions.PersonNotFoundException;
+import com.poll.B.Messages.Producer;
 import com.poll.B.Repositories.PersonRepository;
 import com.poll.B.Repositories.PollRepository;
 import com.poll.B.Repositories.VoteRepository;
@@ -44,6 +47,14 @@ public class RestApiController {
 
     @GetMapping("/persons/email/{email}")
     public Person findPersonByEmail(@PathVariable String email) {
+        Person person = personRepository.findByEmail(email);
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            String json = mapper.writeValueAsString(person);
+            Producer producer = new Producer(json);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
         return personRepository.findByEmail(email);
     }
 
@@ -66,7 +77,6 @@ public class RestApiController {
         return personRepository.findById(id)
                 .map(person -> {
                     person.setEmail(newPerson.getEmail());
-                    person.setAdmin(newPerson.isAdmin());
                     return personRepository.save(person);
                 })
                 .orElseGet(() -> {
