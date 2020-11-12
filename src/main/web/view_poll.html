@@ -24,7 +24,7 @@
 <canvas id="chart" class="chart"></canvas>
 <p id=createdby class="colored"></p>
 
-<div class="getButtons">
+<div id="buttons" class="getButtons">
     <button type="submit" onclick="vote(true)">Yes</button>
     <button type="submit" onclick="vote(false)">No</button>
 </div>
@@ -44,6 +44,7 @@
     poll_id = params.get('id');
     poll_name = params.get('name');
     poll_by = params.get('by');
+    poll_closed = params.get('closed')
     title.innerHTML = poll_name;
     createdby.innerHTML = "created by " + poll_by;
 
@@ -100,6 +101,10 @@
         });
     });
 
+    if (poll_closed === "true") {
+        buttons = document.getElementById("buttons");
+        buttons.innerHTML = "";
+    }
 
     // Voting 
     async function vote(yes) {

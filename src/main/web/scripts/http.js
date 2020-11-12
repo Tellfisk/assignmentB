@@ -124,7 +124,8 @@ function parsePoll(poll) {
     printString += "<div class='item'><a>" + poll['name']+ "</a><br>";
     printString += "Votes: " + poll['votes'].length + "<br>";
 
-    let redirect_url = "\"view_poll.html?id=" +  poll['id'] + "&name=" + poll['name'] + "&by=" + poll['creator'];
+    let redirect_url = "\"view_poll.html?id=" +  poll['id'] + "&name=" + poll['name']
+        + "&by=" + poll['creator'] + "&closed=" + poll['closed'];
     if (! poll['closed']) {
         printString += "<a class='colored' href=" + redirect_url + " \">Vote</a>";
     } else {
@@ -145,7 +146,8 @@ function parseMyPoll(poll) {
     printString += "<div class='item'><a>" + poll['name'] + "</a><br>";
     printString += "Votes: " + poll['votes'].length + "<br>";
 
-    let redirect_url = "\"view_poll.html?id=" + poll['id'] + "&name=" + poll['name'] + "&by=" + poll['creator'];
+    let redirect_url = "\"view_poll.html?id=" + poll['id'] + "&name=" + poll['name']
+        + "&by=" + poll['creator'] + "&closed=" + poll['closed'];
     if (! poll['closed']) {
         printString += "<a class='colored' href=" + redirect_url + " \">Vote</a>";
         printString += "<br><a class='colored' href=\"#\" onclick='closeThisPoll(" + poll['id'] + ")'>Close</a>";
