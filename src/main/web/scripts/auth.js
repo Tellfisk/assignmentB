@@ -20,10 +20,7 @@ auth.onAuthStateChanged(function (user) {
   if (user) {
     // User is signed in
     emailnav.innerHTML = user.email;
-  
-    if (user != null) {
-      
-    }
+
   } else {
     // No user is signed in
     let currentURL = window.location.href.split('?')[0]; //Drops params from url
