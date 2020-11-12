@@ -177,7 +177,7 @@ public class RestApiController {
         pollRepository.deleteById(id);
     }
 
-    @PutMapping("/polls/{id}/close")
+    @PostMapping("/polls/{id}/close")
     public Poll closePoll(@PathVariable Long id) {
         return pollRepository.findById(id)
                 .map(poll -> {

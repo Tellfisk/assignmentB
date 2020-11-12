@@ -131,8 +131,8 @@ function parsePoll(poll) {
 
 async function closePoll(id) {
     let currUrl = url + "/polls/" + id + "/close";
-    console.log("PUT from: " + currUrl);
-    return await request(currUrl, 'PUT', "");
+    console.log("POST from: " + currUrl);
+    return await request(currUrl, 'POST', "");
 }
 
 function parseMyPoll(poll) {
