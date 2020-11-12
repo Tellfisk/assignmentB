@@ -126,8 +126,11 @@ function parsePoll(poll) {
 
     let redirect_url = "\"view_poll.html?id=" +  poll['id'] + "&name=" + poll['name'] + "&by=" + poll['creator'];
     if (! poll['closed']) {
-        printString += "<a class='colored' href=" + redirect_url + " \">Vote</a></div>";
+        printString += "<a class='colored' href=" + redirect_url + " \">Vote</a>";
+    } else {
+        printString += "<a class='colored' href=" + redirect_url + " \">View</a>";
     }
+    printString += "</div>";
     return printString;
 }
 
@@ -145,8 +148,11 @@ function parseMyPoll(poll) {
     let redirect_url = "\"view_poll.html?id=" + poll['id'] + "&name=" + poll['name'] + "&by=" + poll['creator'];
     if (! poll['closed']) {
         printString += "<a class='colored' href=" + redirect_url + " \">Vote</a>";
-        printString += "<br><a class='colored' href=\"#\" onclick='closeThisPoll(" + poll['id'] + ")'>Close</a></div>";
+        printString += "<br><a class='colored' href=\"#\" onclick='closeThisPoll(" + poll['id'] + ")'>Close</a>";
+    } else {
+        printString += "<a class='colored' href=" + redirect_url + " \">View</a>";
     }
+    printString += "</div>";
     return printString;
 }
 

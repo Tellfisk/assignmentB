@@ -1,8 +1,5 @@
 package com.poll.B;
 
-
-import com.poll.B.Messages.Producer;
-
 import java.util.List;
 
 public class VoteDistribution {

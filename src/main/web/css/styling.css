@@ -42,8 +42,7 @@ canvas {
 }
 
 .item {
-  margin: 30px;
-  margin-bottom: 30px;
+  margin: 20px;
 }
 
 .colored {
@@ -261,7 +260,7 @@ input:-webkit-autofill:active  {
   margin: 0;
   padding: 0;
   box-sizing: inherit;
-  font-size: 62,5%;
+  font-size: 100%;
 }
 
 .form__label {
@@ -329,8 +328,9 @@ input:-webkit-autofill:active  {
 }
 @-o-keyframes fadein { /* Opera */
     from {
-        opacity:0;
+        opacity: 0;
     }
     to {
         opacity: 1;
     }
+}
