@@ -90,6 +90,7 @@ async function createPoll(email, person_id) {
     let name = document.getElementById("pname").value;
     let pollJson = '{ \"name\": \"' + name + '\", ' +
                      '\"creator\": \"' + email + '\", ' +
+                     '\"closed\": false, ' +
                      '\"fkperson\": \"' + person_id + '\" }';
     let currUrl = url + "/polls";
     return await request(currUrl, 'POST', pollJson);
