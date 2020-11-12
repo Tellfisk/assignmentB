@@ -10,10 +10,11 @@ public class VoteDistribution {
     private long poll_id;
     private int yes;
     private int no;
+    private boolean closed;
 
     public VoteDistribution() {}
 
-    public VoteDistribution(long poll_id, List<Vote> votes) {
+    public VoteDistribution(long poll_id, List<Vote> votes, boolean closed) {
         this.poll_id = poll_id;
         int yes = 0;
         int no = 0;
@@ -27,6 +28,7 @@ public class VoteDistribution {
 
         this.yes = yes;
         this.no = no;
+        this.closed = closed;
     }
 
     public int getYes() {
@@ -47,5 +49,13 @@ public class VoteDistribution {
 
     public long getPoll_id() {
         return poll_id;
+    }
+
+    public boolean isClosed() {
+        return closed;
+    }
+
+    public void setClosed(boolean closed) {
+        this.closed = closed;
     }
 }

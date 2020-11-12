@@ -82,7 +82,7 @@ public class RestApiController {
     public Poll savePoll(@RequestBody Poll poll) {
         pollRepository.save(poll);
         List<Vote> votes = voteRepository.findAllByFkpoll(poll.getId());
-        VoteDistribution dist = new VoteDistribution(poll.getId(), votes);
+        VoteDistribution dist = new VoteDistribution(poll.getId(), votes, poll.isClosed());
         new Producer(dist);
         return poll;
     }
@@ -110,7 +110,7 @@ public class RestApiController {
         return pollRepository.findById(id)
                 .map(poll -> {
                     List<Vote> votes = voteRepository.findAllByFkpoll(poll.getId());
-                    VoteDistribution dist = new VoteDistribution(poll.getId(), votes);
+                    VoteDistribution dist = new VoteDistribution(poll.getId(), votes, poll.isClosed());
                     return new ResponseEntity<VoteDistribution>(dist,  HttpStatus.OK);
                 })
                 .orElse(new ResponseEntity<VoteDistribution>(HttpStatus.NO_CONTENT));  //TODO: Bad workaround
@@ -122,7 +122,7 @@ public class RestApiController {
         List<VoteDistribution> distlist = new ArrayList<>();
         for (Poll p : polls) {
             List<Vote> votes = voteRepository.findAllByFkpoll(p.getId());
-            distlist.add(new VoteDistribution(p.getId(), votes));
+            distlist.add(new VoteDistribution(p.getId(), votes, p.isClosed()));
         }
         return new ResponseEntity<List<VoteDistribution>>(distlist,  HttpStatus.OK);  //TODO: Bad workaround
     }
@@ -182,6 +182,9 @@ public class RestApiController {
         return pollRepository.findById(id)
                 .map(poll -> {
                     poll.setClosed(true);
+                    List<Vote> votes = voteRepository.findAllByFkpoll(poll.getId());
+                    VoteDistribution dist = new VoteDistribution(poll.getId(), votes, poll.isClosed());
+                    new Producer(dist);
                     pollRepository.save(poll);
                     return poll;
                 })
@@ -199,14 +202,14 @@ public class RestApiController {
                     for (Vote vote : newPoll.getVotes())
                         voteRepository.save(vote);
                     List<Vote> votes = voteRepository.findAllByFkpoll(poll.getId());
-                    VoteDistribution dist = new VoteDistribution(poll.getId(), votes);
+                    VoteDistribution dist = new VoteDistribution(poll.getId(), votes, poll.isClosed());
                     new Producer(dist);
                     return pollRepository.save(poll);
                 })
                 .orElseGet(() -> {
                     newPoll.setId(id);
                     List<Vote> votes = voteRepository.findAllByFkpoll(newPoll.getId());
-                    VoteDistribution dist = new VoteDistribution(newPoll.getId(), votes);
+                    VoteDistribution dist = new VoteDistribution(newPoll.getId(), votes, newPoll.isClosed());
                     new Producer(dist);
                     return pollRepository.save(newPoll);
                 });
@@ -218,7 +221,7 @@ public class RestApiController {
         if (!poll.isClosed()) {
             voteRepository.save(vote);
             List<Vote> votes = voteRepository.findAllByFkpoll(poll.getId());
-            VoteDistribution dist = new VoteDistribution(poll.getId(), votes);
+            VoteDistribution dist = new VoteDistribution(poll.getId(), votes, poll.isClosed());
             new Producer(dist);
         }
         return vote;
@@ -263,14 +266,16 @@ public class RestApiController {
                     vote.setFkpoll(newVote.getFkpoll());
                     vote.setFkperson(newVote.getFkperson());
                     List<Vote> votes = voteRepository.findAllByFkpoll(vote.getFkpoll());
-                    VoteDistribution dist = new VoteDistribution(vote.getFkpoll(), votes);
+                    Poll poll = pollRepository.findById(vote.getFkpoll());
+                    VoteDistribution dist = new VoteDistribution(vote.getFkpoll(), votes, poll.isClosed());
                     new Producer(dist);
                     return voteRepository.save(vote);
                 })
                 .orElseGet(() -> {
                     newVote.setId(id);
                     List<Vote> votes = voteRepository.findAllByFkpoll(newVote.getFkpoll());
-                    VoteDistribution dist = new VoteDistribution(newVote.getFkpoll(), votes);
+                    Poll poll = pollRepository.findById(newVote.getFkpoll());
+                    VoteDistribution dist = new VoteDistribution(newVote.getFkpoll(), votes, poll.isClosed());
                     new Producer(dist);
                     return voteRepository.save(newVote);
                 });
