@@ -141,7 +141,7 @@ function parseMyPoll(poll) {
 
     let redirect_url = "\"view_poll.html?id=" +  poll['id'] + "&name=" + poll['name'] + "&by=" + poll['creator'];
     printString += "<a class='colored' href=" + redirect_url + " \">Vote</a></div>";
-    printString += "<a class='colored' onclick=closeThisPoll(" + poll['id'] + ")>Close</a></div>";
+    printString += "<a class='colored' onclick='closeThisPoll(" + poll['id'] + ")'>Close</a></div>";
     return printString;
 }
 
