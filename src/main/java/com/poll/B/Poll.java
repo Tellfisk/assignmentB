@@ -9,6 +9,7 @@ public class Poll {
     private String name;
     private String creator;
     private long fkperson;
+    private boolean closed;
 
     @OneToMany(mappedBy = "poll")
     public List<Vote> votes = new ArrayList<>();
@@ -19,9 +20,12 @@ public class Poll {
 
     public Poll(){}
 
-    public Poll(String name, List<Vote> votes) {
+    public Poll(String name, String creator, List<Vote> votes, long fkperson, boolean closed) {
         this.name = name;
+        this.creator = creator;
         this.votes = votes;
+        this.fkperson = fkperson;
+        this.closed = closed;
     }
 
     public Long getId() {
@@ -63,6 +67,14 @@ public class Poll {
 
     public void setCreator(String creator) {
         this.creator = creator;
+    }
+
+    public boolean isClosed() {
+        return closed;
+    }
+
+    public void setClosed(boolean closed) {
+        this.closed = closed;
     }
 }
 

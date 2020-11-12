@@ -177,11 +177,25 @@ public class RestApiController {
         pollRepository.deleteById(id);
     }
 
+    @PutMapping("/polls/{id}/close")
+    public Poll closePoll(@PathVariable Long id) {
+        return pollRepository.findById(id)
+                .map(poll -> {
+                    poll.setClosed(true);
+                    pollRepository.save(poll);
+                    return poll;
+                })
+                .orElseGet(Poll::new);
+    }
+
     @PutMapping("/polls/{id}")
     public Poll replacePoll(@RequestBody Poll newPoll, @PathVariable Long id) {
         return pollRepository.findById(id)
                 .map(poll -> {
                     poll.setName(newPoll.getName());
+                    poll.setCreator(newPoll.getCreator());
+                    poll.setClosed(newPoll.isClosed());
+                    poll.setFkperson(newPoll.getFkperson());
                     for (Vote vote : newPoll.getVotes())
                         voteRepository.save(vote);
                     List<Vote> votes = voteRepository.findAllByFkpoll(poll.getId());
@@ -200,11 +214,13 @@ public class RestApiController {
 
     @PostMapping("/votes")
     public Vote saveVote(@RequestBody Vote vote) {
-        voteRepository.save(vote);
         Poll poll = pollRepository.findById(vote.getFkpoll());
-        List<Vote> votes = voteRepository.findAllByFkpoll(poll.getId());
-        VoteDistribution dist = new VoteDistribution(poll.getId(), votes);
-        new Producer(dist);
+        if (!poll.isClosed()) {
+            voteRepository.save(vote);
+            List<Vote> votes = voteRepository.findAllByFkpoll(poll.getId());
+            VoteDistribution dist = new VoteDistribution(poll.getId(), votes);
+            new Producer(dist);
+        }
         return vote;
     }
 

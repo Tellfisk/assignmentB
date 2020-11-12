@@ -1,6 +1,4 @@
 
-
-
 // Generic HTTP Request //
 
 let request = async (nowUrl, method, body) => {
@@ -27,29 +25,6 @@ let request = async (nowUrl, method, body) => {
 
 
 // Unique REST API calls //
-
-async function getPollById() {
-    let id = document.getElementById("pollIdInp").value; // CHANGE
-
-    if(id===""){
-        infoHer.innerHTML = "<h2>ERROR:</h2> <br> Please input ID";
-        return;
-    }
-
-    let currUrl = url + "/polls/" + id;
-    let retVal = await request(currUrl, 'GET', "");
-
-    // if(!Object.keys(retVal).length){
-
-    if (retVal === ""){
-        printval = "No poll with this id.";
-    }
-    else {
-        let parsedVal = JSON.parse(retVal);
-        printval = parsePoll(parsedVal)
-    }
-    infoHer.innerHTML = "<h2>POLL WITH ID " + id + ":</h2><br>" + printval;
-}
 
 async function getPollByName(name) {
     console.log("name " + name);
@@ -97,26 +72,11 @@ async function getAllPollsByUser(id) {
 
     let printString = "";
     myArr.forEach(currPoll => {
-        printString += parsePoll(currPoll);
+        printString += parseMyPoll(currPoll);
     });
 
     infoHer.innerHTML = "<div class='grid'>"+printString+"</div>";
 }
-
-/** 
-    async function getVotes(id) {
-    let currUrl = url + "/polls/" + id + "/votes",
-        retVal = await request(currUrl, 'GET', "");
-    
-    let myArr = JSON.parse(retVal);
-
-    let printString = "";
-    myArr.forEach(currVote => {
-        printString += parseVotes(currVote);
-    });
-    infoHer.innerHTML = "<h2>ALL VOTES:</h2> <br> <p style='text-align: left; margin-left: 8px;' >"+printString+"</p>";
-}
-**/
 
 async function getVotes(id) {
     let currUrl = url + "/polls/" + id + "/distribution";
@@ -164,7 +124,24 @@ function parsePoll(poll) {
     printString += "Votes: " + poll['votes'].length + "<br>";
 
     let redirect_url = "\"view_poll.html?id=" +  poll['id'] + "&name=" + poll['name'] + "&by=" + poll['creator'];
-    printString += "<a class='colored' href=" + redirect_url + " \">Vote</a></div>"
+    printString += "<a class='colored' href=" + redirect_url + " \">Vote</a></div>";
+    return printString;
+}
+
+async function closePoll(id) {
+    let currUrl = url + "/polls/" + id + "/close";
+    console.log("PUT from: " + currUrl);
+    return await request(currUrl, 'PUT', "");
+}
+
+function parseMyPoll(poll) {
+    let printString = "";
+    printString += "<div class='item'><a>" + poll['name']+ "</a><br>";
+    printString += "Votes: " + poll['votes'].length + "<br>";
+
+    let redirect_url = "\"view_poll.html?id=" +  poll['id'] + "&name=" + poll['name'] + "&by=" + poll['creator'];
+    printString += "<a class='colored' href=" + redirect_url + " \">Vote</a></div>";
+    printString += "<a class='colored' onclick=closeThisPoll(" + poll['id'] + ")>Close</a></div>";
     return printString;
 }
 
