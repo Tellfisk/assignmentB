@@ -112,8 +112,7 @@
                         console.log("has voted: " + voted);
                         if (!voted) {
                             console.log("id_poll " + poll_id + " id_person " + person_id + ", email " + email);
-                            createVote(yes, poll_id, person_id).then(retVal => {
-                                console.log(retVal);
+                            createVote(yes, poll_id, person_id).then( _ => {
                                 window.location.reload(false);
                             });
                         }

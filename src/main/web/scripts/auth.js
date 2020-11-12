@@ -27,16 +27,12 @@ auth.onAuthStateChanged(function (user) {
   } else {
     // No user is signed in
     let currentURL = window.location.href.split('?')[0]; //Drops params from url
-    console.log("orig url " + currentURL);
-
     let splitPath = currentURL.split("/");
-    let lastPathElem = splitPath.pop();
-    console.log("without last " + splitPath);
+    let lastPathElem = splitPath.pop();  //remove current file from path, to be replaced with login.html
+
     if (lastPathElem !== "login.html" && lastPathElem !== "register.html") {
-      console.log("At login / register. Elem: " + lastPathElem);
       splitPath.push("login.html");
       let redirect_url = splitPath.join("/");
-      console.log("new url " + redirect_url);
       window.location.replace(redirect_url);
     }
   }
@@ -82,7 +78,7 @@ function signup() {
   auth.createUserWithEmailAndPassword(email, password)
     .then(function success(userData) {
       // Potentially do something with userData
-      window.location.href = "dashboard.html";
+
     }).catch(function failure(error) {
 
       var errorCode = error.code;

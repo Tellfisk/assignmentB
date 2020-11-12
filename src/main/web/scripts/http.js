@@ -69,12 +69,11 @@ async function getPollByName(name) {
 
 async function getPersonIdByEmail(email) {
     let currUrl = url + "/persons/email/" + email;
+    console.log("GET from: " + currUrl);
     let retVal = await request(currUrl, 'GET', "");
     
     let parsedVal = JSON.parse(retVal);
-    let person_id = JSON.stringify(parsedVal['id']);
-
-    return person_id;
+    return JSON.stringify(parsedVal['id']);
 }
 
 async function getAllPolls() {
@@ -133,7 +132,7 @@ async function createPoll(email, person_id) {
                      '\"creator\": \"' + email + '\", ' +
                      '\"fkperson\": \"' + person_id + '\" }';
     let currUrl = url + "/polls";
-    let retVal = await request(currUrl, 'POST', pollJson);
+    return await request(currUrl, 'POST', pollJson);
 }
 
 async function createPerson() {
@@ -141,7 +140,7 @@ async function createPerson() {
     email = email.toLowerCase();
     let pollJson = '{ \"email\": \"' + email + '\" }';
     let currUrl = url + "/persons";
-    let retval = await request(currUrl, 'POST', pollJson);
+    return await request(currUrl, 'POST', pollJson);
 }
 
 async function createVote(yes, poll_id, person_id) {
@@ -149,8 +148,7 @@ async function createVote(yes, poll_id, person_id) {
                      '\"fkpoll\": \"' + poll_id + '\", ' +
                      '\"fkperson\": \"' + person_id + '\" }';
     let currUrl = url + "/votes";
-    let retVal = await request(currUrl, 'POST', pollJson);
-    return retVal;
+    return await request(currUrl, 'POST', pollJson);
 }
 
 async function hasVoted(poll_id, person_id) {

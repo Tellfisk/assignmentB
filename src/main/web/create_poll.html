@@ -49,15 +49,12 @@
                     let email = user.email;
                     console.log(email);
                     getPersonIdByEmail(email).then(id => {
-                        console.log("id " + id + ", email " + email);
-                        createPoll(email, id);
-                        let name = document.getElementById("pname").value;
-                        getPollByName(name).then(poll => {
-                            window.location.href = "view_poll.html?id=" + poll['id'] + "&name=" + name + "&by=" + email;
+                        createPoll(email, id).then( _ => {
+                            let name = document.getElementById("pname").value;
+                            getPollByName(name).then(poll => {
+                                window.location.href = "view_poll.html?id=" + poll['id'] + "&name=" + name + "&by=" + email;
+                            })
                         })
-
-
-
                     });
 
                 }
